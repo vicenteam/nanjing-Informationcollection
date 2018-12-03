@@ -36,8 +36,8 @@ public class SwaggerConfig{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("会员系统 Doc")
-                .description("会员系统 Api文档")
+                .title("信息采集 Doc")
+                .description("信息采集 Api文档")
                 .termsOfServiceUrl("666")
                 .contact("cyq")
                 .version("2.0")
