@@ -16,9 +16,9 @@ guns:
   session-validation-interval: 900  #多久检测一次失效的session(只在单机环境下生效) 单位：秒
 #百度人脸识别api配置
 baidu:
-  face-appid: 14515758
-  face-api-key: K6hg9jGkjRQHsgdgaOlMoBU6
-  face-secret-key: ceUk49nKFuFjNjOGIIpSosSvWCMvlbdZ
+  face-appid: 15559772
+  face-api-key: OAgQGnkRM56j4j7mB0zK33Gp
+  face-secret-key: YBhfNk2WhuHMZXM9DrmG9FIs7i6Xmb0Q
 
 spring:
   profiles:
