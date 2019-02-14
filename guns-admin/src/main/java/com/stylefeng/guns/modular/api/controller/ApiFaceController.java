@@ -50,7 +50,9 @@ public class ApiFaceController extends BaseController {
 
             }else {
                 //进行百度group注册
+                 user = faceUtil.userRegister(client,"",imgBase64,ShiroKit.getUser().getDeptId()+"","");
                 //提示第一次采集
+
             }
 
 //                    userAttendanceEntityWrapper.eq("")
