@@ -1,5 +1,10 @@
 server:
   port: 8084
+  tomcat:
+    max-connections: 1048576
+    max-http-post-size: 1048576
+    max-threads: 1000
+    max-http-header-size: 1048576
 #  ssl:
 #      key-store: classpath:keystore.p12
 #      key-store-password: 123456
