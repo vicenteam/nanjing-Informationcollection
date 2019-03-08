@@ -15,8 +15,8 @@ Dept.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', align: 'center', valign: 'middle',width:'50px'},
-        {title: '门店简称', field: 'simplename', align: 'center', valign: 'middle', sortable: true},
-        {title: '门店全称', field: 'fullname', align: 'center', valign: 'middle', sortable: true},
+        {title: '部门简称', field: 'simplename', align: 'center', valign: 'middle', sortable: true},
+        {title: '部门全称', field: 'fullname', align: 'center', valign: 'middle', sortable: true},
         {title: '排序', field: 'num', align: 'center', valign: 'middle', sortable: true},
         {title: '联系人', field: 'linkman', align: 'center', valign: 'middle', sortable: true},
         {title: '联系电话', field: 'tel', align: 'center', valign: 'middle', sortable: true},
@@ -44,7 +44,7 @@ Dept.check = function () {
 Dept.openAddDept = function () {
     var index = layer.open({
         type: 2,
-        title: '添加门店',
+        title: '添加部门',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -60,7 +60,7 @@ Dept.openDeptDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '门店详情',
+            title: '部门详情',
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
@@ -87,7 +87,7 @@ Dept.delete = function () {
             ajax.start();
         };
 
-        Feng.confirm("是否刪除该门店?", operation);
+        Feng.confirm("是否刪除该部门?", operation);
     }
 };
 
