@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.InformationPersonalMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.InformationPersonal">
+        <id column="id" property="id" />
+        <result column="fullName" property="fullName" />
+        <result column="sex" property="sex" />
+        <result column="minZu" property="minZu" />
+        <result column="age" property="age" />
+        <result column="birthDate" property="birthDate" />
+        <result column="cardId" property="cardId" />
+        <result column="telephone" property="telephone" />
+        <result column="telHome" property="telHome" />
+        <result column="userType" property="userType" />
+        <result column="areaType" property="areaType" />
+        <result column="address" property="address" />
+        <result column="nowAddress" property="nowAddress" />
+        <result column="maritalStatus" property="maritalStatus" />
+        <result column="economics" property="economics" />
+        <result column="certificateNum" property="certificateNum" />
+        <result column="certificateNumType" property="certificateNumType" />
+        <result column="oldPosition" property="oldPosition" />
+        <result column="hobby" property="hobby" />
+        <result column="parentId" property="parentId" />
+        <result column="createDate" property="createDate" />
+        <result column="updateDate" property="updateDate" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fullName, sex, minZu, age, birthDate, cardId, telephone, telHome, userType, areaType, address, nowAddress, maritalStatus, economics, certificateNum, certificateNumType, oldPosition, hobby, parentId, createDate, updateDate, status
+    </sql>
+
+</mapper>

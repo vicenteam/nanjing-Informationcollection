@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.FirstVisitAssessmentTableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.FirstVisitAssessmentTable">
+        <id column="id" property="id" />
+        <result column="firstvisit_community_1" property="firstvisitCommunity1" />
+        <result column="firstvisit_community_2" property="firstvisitCommunity2" />
+        <result column="firstvisit_community_3" property="firstvisitCommunity3" />
+        <result column="firstvisit_name" property="firstvisitName" />
+        <result column="firstvisit_sex" property="firstvisitSex" />
+        <result column="firstvisit_level_education" property="firstvisitLevelEducation" />
+        <result column="firstvisit_idcard" property="firstvisitIdcard" />
+        <result column="firstvisit_othercard" property="firstvisitOthercard" />
+        <result column="firstvisit_phone" property="firstvisitPhone" />
+        <result column="firstvisit_residential_address" property="firstvisitResidentialAddress" />
+        <result column="firstvisit_residential_time" property="firstvisitResidentialTime" />
+        <result column="firstvisit_emergency_contact" property="firstvisitEmergencyContact" />
+        <result column="firstvisit_professional" property="firstvisitProfessional" />
+        <result column="firstvisit_category" property="firstvisitCategory" />
+        <result column="firstvisit_economic_sources" property="firstvisitEconomicSources" />
+        <result column="firstvisit_marital" property="firstvisitMarital" />
+        <result column="firstvisit_children" property="firstvisitChildren" />
+        <result column="firstvisit_medical_category" property="firstvisitMedicalCategory" />
+        <result column="firstvisit_living" property="firstvisitLiving" />
+        <result column="firstvisit_living_house" property="firstvisitLivingHouse" />
+        <result column="firstvisit_living_elevator" property="firstvisitLivingElevator" />
+        <result column="firstvisit_living_layer" property="firstvisitLivingLayer" />
+        <result column="firstvisit_living_toilet" property="firstvisitLivingToilet" />
+        <result column="firstvisit_living_bathing_facilities" property="firstvisitLivingBathingFacilities" />
+        <result column="firstvisit_original_ care_situation" property="firstvisitOriginal careSituation" />
+        <result column="firstvisit_service" property="firstvisitService" />
+        <result column="firstvisit_physical_condition_radio" property="firstvisitPhysicalConditionRadio" />
+        <result column="firstvisit_physical_condition_checkbox" property="firstvisitPhysicalConditionCheckbox" />
+        <result column="firstvisit_psychological" property="firstvisitPsychological" />
+        <result column="firstvisit_social_activities" property="firstvisitSocialActivities" />
+        <result column="firstvisit_social_activities_type" property="firstvisitSocialActivitiesType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, firstvisit_community_1, firstvisit_community_2, firstvisit_community_3, firstvisit_name, firstvisit_sex, firstvisit_level_education, firstvisit_idcard, firstvisit_othercard, firstvisit_phone, firstvisit_residential_address, firstvisit_residential_time, firstvisit_emergency_contact, firstvisit_professional, firstvisit_category, firstvisit_economic_sources, firstvisit_marital, firstvisit_children, firstvisit_medical_category, firstvisit_living, firstvisit_living_house, firstvisit_living_elevator, firstvisit_living_layer, firstvisit_living_toilet, firstvisit_living_bathing_facilities, firstvisit_original_ care_situation, firstvisit_service, firstvisit_physical_condition_radio, firstvisit_physical_condition_checkbox, firstvisit_psychological, firstvisit_social_activities, firstvisit_social_activities_type
+    </sql>
+
+</mapper>

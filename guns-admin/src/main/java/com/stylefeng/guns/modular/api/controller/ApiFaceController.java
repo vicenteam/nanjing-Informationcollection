@@ -13,6 +13,7 @@ import com.stylefeng.guns.modular.face.FaceUser;
 import com.stylefeng.guns.modular.face.FaceUtil;
 import com.stylefeng.guns.modular.system.model.FaceIdentifyTop;
 import com.stylefeng.guns.modular.system.service.IFaceIdentifyTopService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +29,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/apifacecontroller")
+@Api(value="人脸识别controller",tags={"人脸识别接口"})
 public class ApiFaceController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(ApiFaceController.class);
     @Autowired

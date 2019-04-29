@@ -10,6 +10,7 @@ import com.stylefeng.guns.modular.system.dao.UserMapper;
 import com.stylefeng.guns.modular.system.model.Dept;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IDeptService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/apilogincontroller")
+@Api(value="登陆controller",tags={"登陆操作接口"})
 public class ApiLoginController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(ApiLoginController.class);
 

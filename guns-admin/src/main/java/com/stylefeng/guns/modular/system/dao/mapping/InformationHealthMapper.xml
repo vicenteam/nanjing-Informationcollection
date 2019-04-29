@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.InformationHealthMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.InformationHealth">
+        <id column="id" property="id" />
+        <result column="hearing" property="hearing" />
+        <result column="help_hear" property="helpHear" />
+        <result column="health" property="health" />
+        <result column="allergy" property="allergy" />
+        <result column="allergy_history" property="allergyHistory" />
+        <result column="allergy_type" property="allergyType" />
+        <result column="every_eat_drugs" property="everyEatDrugs" />
+        <result column="blood_type" property="bloodType" />
+        <result column="zi_li_type" property="ziLiType" />
+        <result column="IMEI" property="imei" />
+        <result column="health_record" property="healthRecord" />
+        <result column="test_record" property="testRecord" />
+        <result column="allergy_type_other_text" property="allergyTypeOtherText" />
+        <result column="health_other_text" property="healthOtherText" />
+        <result column="parentId" property="parentId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hearing, help_hear, health, allergy, allergy_history, allergy_type, every_eat_drugs, blood_type, zi_li_type, IMEI, health_record, test_record, allergy_type_other_text, health_other_text
+    </sql>
+
+</mapper>

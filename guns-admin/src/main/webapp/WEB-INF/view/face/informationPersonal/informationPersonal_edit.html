@@ -1,0 +1,48 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="fullName" name="姓名" value="${item.fullName}" underline="true"/>
+                            <#input id="sex" name="性别" value="${item.sex}" underline="true"/>
+                            <#input id="minZu" name="民族" value="${item.minZu}" underline="true"/>
+                            <#input id="age" name="年龄" value="${item.age}" underline="true"/>
+                            <#input id="birthDate" name="出生日期" value="${item.birthDate}" underline="true"/>
+                            <#input id="cardId" name="身份证号" value="${item.cardId}" underline="true"/>
+                            <#input id="telephone" name="手机号" value="${item.telephone}" underline="true"/>
+                            <#input id="telHome" name="座机" value="${item.telHome}" underline="true"/>
+                            <#input id="userType" name="用户类型(1.政府援助用户,2.商业用户)" value="${item.userType}" underline="true"/>
+                            <#input id="areaType" name="生活区域(1.城市,2.农村)" value="${item.areaType}" underline="true"/>
+                            <#input id="address" name="" value="${item.address}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="nowAddress" name="现居住地址" value="${item.nowAddress}" underline="true"/>
+                            <#input id="maritalStatus" name="婚姻状况(1.未婚，2.已婚，3.离异，4.丧偶)" value="${item.maritalStatus}" underline="true"/>
+                            <#input id="economics" name="经济来源（1.养老金，2.子女供养，3.救济优抚，4.兼职，5.其他）" value="${item.economics}" underline="true"/>
+                            <#input id="certificateNum" name="证号" value="${item.certificateNum}" underline="true"/>
+                            <#input id="certificateNumType" name="证号类型（1.低保，2.优抚，3.失独，4.其他）" value="${item.certificateNumType}" underline="true"/>
+                            <#input id="oldPosition" name="退休前职位" value="${item.oldPosition}" underline="true"/>
+                            <#input id="hobby" name="爱好" value="${item.hobby}" underline="true"/>
+                            <#input id="parentId" name="主表id" value="${item.parentId}" underline="true"/>
+                            <#input id="createDate" name="" value="${item.createDate}" underline="true"/>
+                            <#input id="updateDate" name="" value="${item.updateDate}" underline="true"/>
+                            <#input id="status" name="" value="${item.status}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="InformationPersonalInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="InformationPersonalInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/informationPersonal/informationPersonal_info.js"></script>
+@}

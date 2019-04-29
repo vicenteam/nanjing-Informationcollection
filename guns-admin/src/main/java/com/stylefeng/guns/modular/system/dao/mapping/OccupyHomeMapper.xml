@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.OccupyHomeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.OccupyHome">
+        <id column="id" property="id" />
+        <result column="occupy_home_type" property="occupyHomeType" />
+        <result column="occupy_home_government_purchases" property="occupyHomeGovernmentPurchases" />
+        <result column="occupy_home_up_standard1" property="occupyHomeUpStandard1" />
+        <result column="occupy_home_up_standard2" property="occupyHomeUpStandard2" />
+        <result column="occupy_home_government_to_buy" property="occupyHomeGovernmentToBuy" />
+        <result column="occupy_home_expect_pension" property="occupyHomeExpectPension" />
+        <result column="occupy_home_expect_server" property="occupyHomeExpectServer" />
+        <result column="createtime" property="createtime" />
+        <result column="createuserid" property="createuserid" />
+        <result column="deptid" property="deptid" />
+        <result column="parentId" property="parentId" />
+        <result column="occupy_home_type_other_text" property="occupyHomeTypeOtherText" />
+        <result column="occupy_home_expect_pension_other_text" property="occupyHomeExpectPensionOtherText" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, occupy_home_type, occupy_home_government_purchases, occupy_home_up_standard1, occupy_home_up_standard2, occupy_home_government_to_buy, occupy_home_expect_pension, occupy_home_expect_server, createtime, createuserid, deptid, parentId, occupy_home_type_other_text, occupy_home_expect_pension_other_text
+    </sql>
+
+</mapper>

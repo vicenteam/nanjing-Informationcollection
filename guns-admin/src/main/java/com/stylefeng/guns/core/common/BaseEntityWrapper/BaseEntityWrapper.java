@@ -21,7 +21,7 @@ public class BaseEntityWrapper<T> extends EntityWrapper {
 
 
     public BaseEntityWrapper() {
-        eq("deptId", userOrgId);
+//        eq("deptId", userOrgId);
     }
 
     @Override

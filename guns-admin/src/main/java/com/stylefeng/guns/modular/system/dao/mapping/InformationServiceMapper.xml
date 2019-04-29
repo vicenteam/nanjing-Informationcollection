@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.InformationServiceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.InformationService">
+        <id column="id" property="id" />
+        <result column="service_type" property="serviceType" />
+        <result column="state" property="state" />
+        <result column="phone_meal" property="phoneMeal" />
+        <result column="phone_type" property="phoneType" />
+        <result column="person_service_type" property="personServiceType" />
+        <result column="gov_num" property="govNum" />
+        <result column="change_status" property="changeStatus" />
+        <result column="refuse" property="refuse" />
+        <result column="parent_id" property="parentId" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, service_type, state, phone_meal, phone_type, person_service_type, gov_num, change_status, refuse, parent_id, create_date, update_date, status
+    </sql>
+
+</mapper>

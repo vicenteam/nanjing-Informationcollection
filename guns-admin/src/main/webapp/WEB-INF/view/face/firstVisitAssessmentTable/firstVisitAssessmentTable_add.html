@@ -1,0 +1,57 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" underline="true"/>
+                            <#input id="firstvisitCommunity1" name="所在社区1" underline="true"/>
+                            <#input id="firstvisitCommunity2" name="" underline="true"/>
+                            <#input id="firstvisitCommunity3" name="" underline="true"/>
+                            <#input id="firstvisitName" name="姓名" underline="true"/>
+                            <#input id="firstvisitSex" name="性别" underline="true"/>
+                            <#input id="firstvisitLevelEducation" name="文化程度" underline="true"/>
+                            <#input id="firstvisitIdcard" name="身份证号码" underline="true"/>
+                            <#input id="firstvisitOthercard" name="社会保障卡号" underline="true"/>
+                            <#input id="firstvisitPhone" name="联系电话" underline="true"/>
+                            <#input id="firstvisitResidentialAddress" name="居住地址" underline="true"/>
+                            <#input id="firstvisitResidentialTime" name="常住时间( 0 :1年以下 1: 1-3年  2 :3年以上)" underline="true"/>
+                            <#input id="firstvisitEmergencyContact" name="紧急联系人(,号隔开 共计4次)" underline="true"/>
+                            <#input id="firstvisitProfessional" name="原职业(0公务员 1军人 2事业职工 3企业职工 4农民 5其它职业 6无职业)" underline="true"/>
+                            <#input id="firstvisitCategory" name="人员类别(0离休 1退休 2低保户 3低保边缘户 4城市三无 5农村五保 6供养人员 7其他)" underline="true"/>
+                            <#input id="firstvisitEconomicSources" name="经济来源(0离休金/退休金 1养老保险 2子女补贴 3亲友资助 4低保金 5供养人员补贴拆迁补助 6失地农民补助 7其他              （    元/月）)"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="firstvisitMarital" name="婚姻状况(0未婚  1已婚  2丧偶  3离婚  4未说明的婚姻状况)" underline="true"/>
+                            <#input id="firstvisitChildren" name="子女状况(0有子女 1无子女)" underline="true"/>
+                            <#input id="firstvisitMedicalCategory" name="医疗类别(0公费 1职工医保 2居民医保 3新农合 4自费)" underline="true"/>
+                            <#input id="firstvisitLiving" name="居住状况(0独居 1空巢（与配偶/伴侣居住） 2与子女居住 3与其他亲属（含父母、兄弟姐妹等）居住 4与非亲属关系的居住 5养老机构)" underline="true"/>
+                            <#input id="firstvisitLivingHouse" name="是否自有房屋：0是1否" underline="true"/>
+                            <#input id="firstvisitLivingElevator" name="楼层电梯：0有1无" underline="true"/>
+                            <#input id="firstvisitLivingLayer" name="居住楼层(无电梯的)：0一层 1二层 2三层以上；" underline="true"/>
+                            <#input id="firstvisitLivingToilet" name="室内厕所：0有1无；" underline="true"/>
+                            <#input id="firstvisitLivingBathingFacilities" name="室内洗浴设备：0有1无" underline="true"/>
+                            <#input id="firstvisitOriginal careSituation" name="0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他" underline="true"/>
+                            <#input id="firstvisitService" name="服务需求(0家务料理  1代购物品 2康复保健  3紧急呼叫  4心理关爱  5法律援助  6文化娱乐 7助餐  8送餐  9陪聊  10陪住  11陪外出  12日托  13入住老年人福利机构; 14其他:)" underline="true"/>
+                            <#input id="firstvisitPhysicalConditionRadio" name="身体状况单选(0健康 1重病 2慢性病 )" underline="true"/>
+                            <#input id="firstvisitPhysicalConditionCheckbox" name="身体状况多选(0恶性肿瘤 1尿毒症透析 2器官移植(含手术后的抗排异治疗) 3白血病 4急性心肌梗塞 5脑中风 6急性坏死性胰腺炎 7脑外伤 8主动脉手术 9冠状动脉旁路手术 10慢性肾功能性衰竭 11急慢性重症肝炎 12危及生命的良性脑瘤 13重症糖尿病 14消化道出血 15系统性红斑狼疮 16慢性再生障碍性贫血 17血友病 18重病精神病  19高血压 20冠心病 21前列腺增生 22糖尿病 23其他   )" underline="true"/>
+                            <#input id="firstvisitPsychological" name="心理状况(0正常  1偶有孤独感  2经常觉得很孤独)" underline="true"/>
+                            <#input id="firstvisitSocialActivities" name="社会活动(0 经常 1偶尔 2从不)" underline="true"/>
+                            <#input id="firstvisitSocialActivitiesType" name="社会活动类型：0文娱类 1教育类 2健身类 3慈善类 4经济类 5宗教类 6其他" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="FirstVisitAssessmentTableInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="FirstVisitAssessmentTableInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/firstVisitAssessmentTable/firstVisitAssessmentTable_info.js"></script>
+@}

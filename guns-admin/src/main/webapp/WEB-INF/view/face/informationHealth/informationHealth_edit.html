@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="hearing" name="听力（1.良好，2.一般，3.很大声才能听见，4.听不见）" value="${item.hearing}" underline="true"/>
+                            <#input id="helpHear" name="是否佩戴助听器（1.是，2.否）" value="${item.helpHear}" underline="true"/>
+                            <#input id="health" name="病史（1.健康   2.高血压   3.糖尿病   4.冠心病   5.恶性肿瘤   6.结核病   7.肝炎   8.脑卒中  9.精神疾病  10.慢性阻塞性肺疾病  11.慢性支气管炎  12.帕金森综合症  13.腰椎间盘突出  14.阿尔茨海默病  15.心脏病  16.肺气肿  17.白内障  18.脑血栓  19.风湿病  20.脑中风  21.高脂血症  22.哮喘  23.意外伤害  24.其他_____）" value="${item.health}" underline="true"/>
+                            <#input id="allergy" name="药物过敏情况" value="${item.allergy}" underline="true"/>
+                            <#input id="allergyHistory" name="药物过敏史（1.是，2.否）" value="${item.allergyHistory}" underline="true"/>
+                            <#input id="allergyType" name="过敏类型（1药物过敏  2化工金属  3植物过敏  4食物过敏  5动物过敏  6其他_____）" value="${item.allergyType}" underline="true"/>
+                            <#input id="everyEatDrugs" name="经常服用药物" value="${item.everyEatDrugs}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="bloodType" name="血型" value="${item.bloodType}" underline="true"/>
+                            <#input id="ziLiType" name="老人自理类别（1自理  2失能  3半失能  4失智  5轻度依赖  6重度依赖  7不能自理）" value="${item.ziLiType}" underline="true"/>
+                            <#input id="imei" name="绑定设备" value="${item.imei}" underline="true"/>
+                            <#input id="healthRecord" name="健康记录" value="${item.healthRecord}" underline="true"/>
+                            <#input id="testRecord" name="体检记录" value="${item.testRecord}" underline="true"/>
+                            <#input id="allergyTypeOtherText" name="过敏类型其他对应文本" value="${item.allergyTypeOtherText}" underline="true"/>
+                            <#input id="healthOtherText" name="病史其他对应文本" value="${item.healthOtherText}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="InformationHealthInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="InformationHealthInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/informationHealth/informationHealth_info.js"></script>
+@}
