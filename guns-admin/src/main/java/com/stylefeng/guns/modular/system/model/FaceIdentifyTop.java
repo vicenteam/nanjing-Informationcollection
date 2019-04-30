@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -16,46 +19,57 @@ import java.io.Serializable;
  * @since 2019-02-18
  */
 @TableName("face_identify_top")
+@ApiModel(value = "采集人识别基础Model")
 public class FaceIdentifyTop extends Model<FaceIdentifyTop> {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty("FaceIdentifyTop_id")
     private Integer id;
     /**
      * 身份证号
      */
+    @ApiModelProperty("身份证号")
     private String idcard;
     /**
      * 姓名
      */
+    @ApiModelProperty("姓名")
     private String username;
     /**
      * 百度aifacetocken
      */
     @TableField("face_token")
+    @ApiModelProperty(hidden = true)
     private String faceToken;
     /**
      * 创建时间
      */
+    @ApiModelProperty(hidden = true)
     private String createtime;
     /**
      * 修改时间
      */
+    @ApiModelProperty(hidden = true)
     private String updatetime;
     /**
      * 创建人
      */
+    @ApiModelProperty(hidden = true)
     private String createuserid;
+    @ApiModelProperty(hidden = true)
     private Integer status;
     /**
      * 修改人id
      */
+    @ApiModelProperty(hidden = true)
     private String updateuserid;
     private Integer deptid;
     /**
      * 采集信息base64图片字符串
      */
+    @ApiModelProperty(hidden = true)
     private String imgbase64;
 
 

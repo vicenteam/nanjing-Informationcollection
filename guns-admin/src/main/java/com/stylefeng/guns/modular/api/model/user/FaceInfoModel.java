@@ -14,16 +14,27 @@ public class FaceInfoModel {
     @ApiModelProperty("识别结果(头像地址)")
     private String imgUrl;
 
-    @ApiModelProperty("识别结果(头像base64字符)")
-    private String imgBase64;
+//    @ApiModelProperty("识别结果(头像base64字符)")
+//    private String imgBase64;
 
-    public String getImgBase64() {
-        return imgBase64;
+    @ApiModelProperty("识别结果(FaceIdentifyTop_id)")
+    private Integer id;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setImgBase64(String imgBase64) {
-        this.imgBase64 = imgBase64;
+    public void setId(Integer id) {
+        this.id = id;
     }
+
+//    public String getImgBase64() {
+//        return imgBase64;
+//    }
+//
+//    public void setImgBase64(String imgBase64) {
+//        this.imgBase64 = imgBase64;
+//    }
 
     public Integer getType() {
         return type;

@@ -22,7 +22,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/apiinformationhealthcontroller")
-@Api(value="采集人生活居住状况及社会关系controller",tags={"采集人生活居住状况及社会关系接口"})
+@Api(value="采集人采集用户健康信息controller",tags={"采集人采集用户健康信息接口"})
 public class ApiInformationHealthController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(ApiInformationHealthController.class);
 
@@ -30,7 +30,7 @@ public class ApiInformationHealthController extends BaseController {
    private IInformationHealthService informationHealthService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ApiOperation("新增采集人生活居住状况及社会关系")
+    @ApiOperation("新增采集人采集用户健康信息")
     @ApiImplicitParams({
             @ApiImplicitParam(required = true, name = "hearing", value = "听力（1.良好，2.一般，3.很大声才能听见，4.听不见）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "helpHear", value = "是否佩戴助听器（1.是，2.否）", paramType = "query"),
@@ -52,7 +52,7 @@ public class ApiInformationHealthController extends BaseController {
         return informationPersonalResponseData;
     }
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    @ApiOperation("编辑采集人生活居住状况及社会关系")
+    @ApiOperation("编辑采集人采集用户健康信息")
     @ApiImplicitParams({
             @ApiImplicitParam(required = true, name = "id", value = "id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "hearing", value = "听力（1.良好，2.一般，3.很大声才能听见，4.听不见）", paramType = "query"),

@@ -1,20 +1,22 @@
 server:
-  port: 8084
+  port: 8443
   tomcat:
     max-connections: 1048576
     max-http-post-size: 1048576
     max-threads: 1000
     max-http-header-size: 1048576
-#  ssl:
-#      key-store: classpath:keystore.p12
-#      key-store-password: 123456
-#      keyStoreType: PKCS12
-#      keyAlias: tomcat
+
+  ssl.key-store: 'classpath:hybc.ikeek.cn.jks'
+  ssl.key-store-password: XMfu1GfqAq
+  ssl.key-store-type: JKS
+  ssl.key-alias: server
+  ssl.key-store-provider: SUN
 
 guns:
   swagger-open: true              #是否开启swagger (true/false)
   kaptcha-open: false             #是否开启登录时验证码 (true/false)
-  file-upload-path: D:/faceidentify/img       #文件上传目录(不配置的话为java.io.tmpdir目录)
+#  file-upload-path: D:/faceidentify/img       #文件上传目录(不配置的话为java.io.tmpdir目录)
+  file-upload-path: /hyxt/choujiang/api/faceimg       #文件上传目录(不配置的话为java.io.tmpdir目录)
 #  file-upload-path: d:/tmp       #文件上传目录(不配置的话为java.io.tmpdir目录)
   spring-session-open: false      #是否开启spring session,如果是多机环境需要开启(true/false)
   session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
@@ -56,8 +58,10 @@ spring:
   profiles: local
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/faceidentify?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    url: jdbc:mysql://47.104.252.44:3306/faceidentify?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
     username: root
     password: root
+#    password: Cdxxkj@123
     db-name: faceidentify #用来搜集数据库的所有表
     filters: wall,mergeStat
 

@@ -62,7 +62,7 @@ public class ApiInfomationPersonalController extends BaseController {
             @ApiImplicitParam(required = true, name = "certificateNumType", value = "证号类型（1.低保，2.优抚，3.失独，4.其他）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "oldPosition", value = "退休前职位", paramType = "query"),
             @ApiImplicitParam(required = true, name = "hobby", value = "爱好", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "主表id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<InformationPersonal> add(InformationPersonal informationPersonal,int parentId) throws Exception {
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
@@ -96,7 +96,7 @@ public class ApiInfomationPersonalController extends BaseController {
             @ApiImplicitParam(required = true, name = "certificateNumType", value = "证号类型（1.低保，2.优抚，3.失独，4.其他）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "oldPosition", value = "退休前职位", paramType = "query"),
             @ApiImplicitParam(required = true, name = "hobby", value = "爱好", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "主表id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<InformationPersonal> edit(InformationPersonal informationPersonal) throws Exception {
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();

@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.api.controller;
 import com.alibaba.fastjson.JSON;
 import com.baidu.aip.face.AipFace;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
@@ -24,13 +25,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.BASE64Decoder;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Date;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/apifacecontroller")
 @Api(value="人脸识别controller",tags={"人脸识别接口"})
 public class ApiFaceController extends BaseController {
+    @Autowired
+    private GunsProperties gunsProperties;
+
     private final Logger log = LoggerFactory.getLogger(ApiFaceController.class);
     @Autowired
     private IFaceIdentifyTopService faceIdentifyTopService;
@@ -66,11 +74,13 @@ public class ApiFaceController extends BaseController {
                 String user_info = faceUser.getUser_info();
                 FaceInfoModel faceInfoModel = JSON.parseObject(user_info, FaceInfoModel.class);
                 faceInfoModel.setType(0);
-                faceInfoModel.setImgUrl("");
+
                 EntityWrapper<FaceIdentifyTop> faceIdentifyTopEntityWrapper = new EntityWrapper<>();
                 faceIdentifyTopEntityWrapper.eq("idcard",faceInfoModel.getIdCard());
                 FaceIdentifyTop faceIdentifyTop = faceIdentifyTopService.selectOne(faceIdentifyTopEntityWrapper);
-                faceInfoModel.setImgBase64(faceIdentifyTop.getImgbase64());
+//                faceInfoModel.setImgBase64(faceIdentifyTop.getImgbase64());
+                faceInfoModel.setImgUrl(faceIdentifyTop.getImgbase64());
+                faceInfoModel.setId(faceIdentifyTop.getId());
                 responseData.setDataCollection(faceInfoModel);
 
             }else {
@@ -88,7 +98,13 @@ public class ApiFaceController extends BaseController {
 //                    userAttendanceEntityWrapper.eq("")
             //返回结果
         } else {
-            throw new Exception("暂无匹配数据");
+            FaceInfoModel faceInfoModel=new FaceInfoModel();
+            faceInfoModel.setType(1);
+            faceInfoModel.setIdCard("");
+            faceInfoModel.setImgUrl("");
+            faceInfoModel.setName("");
+            responseData.setDataCollection(faceInfoModel);
+//            throw new Exception("暂无匹配数据");
         }
         return responseData;
     }
@@ -101,8 +117,8 @@ public class ApiFaceController extends BaseController {
             @ApiImplicitParam(required = true, name = "idCard", value = "身份证"),
             @ApiImplicitParam(required = true, name = "deptId", value = "部门Id"),
     })
-    public ResponseData faceRegistered(String imgBase64,String name,String idCard,String deptId){
-        ResponseData responseData=new ResponseData();
+    public ResponseData<FaceIdentifyTop> faceRegistered(String imgBase64,String name,String idCard,String deptId){
+        ResponseData<FaceIdentifyTop> responseData=new ResponseData();
         AipFace client = new AipFace(FaceUtil.APP_ID, FaceUtil.API_KEY, FaceUtil.SECRET_KEY);
         FaceUtil faceUtil = new FaceUtil();
         JSONObject jsonObject = faceUtil.userRegister(client, "{name:\""+name+"\",idCard:\""+idCard+"\",imgUrl:\"\" }", imgBase64, deptId, idCard);
@@ -111,10 +127,44 @@ public class ApiFaceController extends BaseController {
         FaceIdentifyTop faceIdentifyTop = new FaceIdentifyTop();
         faceIdentifyTop.setDeptid(Integer.parseInt(deptId));
         faceIdentifyTop.setIdcard(idCard);
-        faceIdentifyTop.setImgbase64(imgBase64);
+        faceIdentifyTop.setImgbase64(generateImage(imgBase64,idCard));
         faceIdentifyTop.setCreatetime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         faceIdentifyTop.setUsername(name);
         faceIdentifyTop.insert();
+        responseData.setDataCollection(faceIdentifyTop);
         return responseData;
     }
+    //base64字符串转化成图片
+    public  String generateImage(String imgStr,String idcard)
+    {  //对字节数组字符串进行Base64解码并生成图片
+        if (imgStr == null) //图像数据为空
+            return "";
+        BASE64Decoder decoder = new BASE64Decoder();
+        try
+        {
+            //Base64解码
+            byte[] b = decoder.decodeBuffer(imgStr);
+            for(int i=0;i<b.length;++i)
+            {
+                if(b[i]<0)
+                {//调整异常数据
+                    b[i]+=256;
+                }
+            }
+            //生成jpeg图片
+            String imgName=idcard+"_"+UUID.randomUUID()+".jpg";
+            String imgFilePath = gunsProperties.getFileUploadPath()+""+imgName;//新生成的图片
+            OutputStream out = new FileOutputStream(imgFilePath);
+            out.write(b);
+            out.flush();
+            out.close();
+            return imgName;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
 }

@@ -117,7 +117,7 @@ public class InformationPersonal extends Model<InformationPersonal> {
     /**
      * 主表id
      */
-    @ApiModelProperty("主表id")
+    @ApiModelProperty("FaceIdentifyTop_id")
     private Integer parentId;
     @JsonIgnore
     @ApiModelProperty(hidden = true)
