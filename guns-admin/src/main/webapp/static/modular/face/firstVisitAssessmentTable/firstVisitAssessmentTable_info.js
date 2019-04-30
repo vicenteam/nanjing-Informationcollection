@@ -1,5 +1,5 @@
 /**
- * 初始化基础信息详情对话框
+ * 初始化首次走访信息详情对话框
  */
 var FirstVisitAssessmentTableInfoDlg = {
     firstVisitAssessmentTableInfoData : {}
@@ -70,13 +70,16 @@ FirstVisitAssessmentTableInfoDlg.collectData = function() {
     .set('firstvisitLivingLayer')
     .set('firstvisitLivingToilet')
     .set('firstvisitLivingBathingFacilities')
-    .set('firstvisitOriginalcareSituation')
+    .set('firstvisitOriginalCareSituation')
     .set('firstvisitService')
     .set('firstvisitPhysicalConditionRadio')
     .set('firstvisitPhysicalConditionCheckbox')
     .set('firstvisitPsychological')
     .set('firstvisitSocialActivities')
-    .set('firstvisitSocialActivitiesType');
+    .set('firstvisitSocialActivitiesType')
+    .set('firstvisitEconomicSourcesOtherText')
+    .set('firstvisitPhysicalConditionCheckboxOtherText')
+    .set('faceIdentifyTopId');
 }
 
 /**

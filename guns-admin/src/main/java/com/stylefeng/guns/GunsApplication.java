@@ -27,11 +27,11 @@ public class GunsApplication extends WebMvcConfigurerAdapter implements CommandL
         SpringApplication.run(GunsApplication.class, args);
         logger.info("GunsApplication is success!");
     }
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/.well-known/**").addResourceLocations("classpath:/.well-known/");
-        super.addResourceHandlers(registry);
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/.well-known/**").addResourceLocations("classpath:/.well-known/");
+//        super.addResourceHandlers(registry);
+//    }
 
 //    @Bean
 //    public TomcatServletWebServerFactory servletContainer() {

@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.api.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.DateUtil;
@@ -77,7 +78,7 @@ public class ApiInfomationPersonalController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ApiOperation("编辑采集人基础信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "id", value = "id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "id", value = "InformationPersonal_id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "fullName", value = "姓名", paramType = "query"),
             @ApiImplicitParam(required = true, name = "sex", value = "性别", paramType = "query"),
             @ApiImplicitParam(required = true, name = "minZu", value = "民族", paramType = "query"),
@@ -102,6 +103,19 @@ public class ApiInfomationPersonalController extends BaseController {
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
         informationPersonal.setUpdateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         iInformationPersonalService.updateById(informationPersonal);
+        informationPersonalResponseData.setDataCollection(informationPersonal);
+        return informationPersonalResponseData;
+    }
+    @RequestMapping(value = "/getData", method = RequestMethod.POST)
+    @ApiOperation("获取采集人基础信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
+    })
+    public ResponseData<InformationPersonal> getData(Integer parentId) throws Exception {
+        ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
+        EntityWrapper<InformationPersonal> informationPersonalEntityWrapper = new EntityWrapper<>();
+        informationPersonalEntityWrapper.eq("parentId",parentId);
+        InformationPersonal informationPersonal = iInformationPersonalService.selectOne(informationPersonalEntityWrapper);
         informationPersonalResponseData.setDataCollection(informationPersonal);
         return informationPersonalResponseData;
     }

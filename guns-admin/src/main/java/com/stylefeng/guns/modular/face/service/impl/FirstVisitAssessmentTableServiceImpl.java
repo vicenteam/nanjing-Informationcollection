@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author stylefeng
- * @since 2019-04-29
+ * @since 2019-04-30
  */
 @Service
 public class FirstVisitAssessmentTableServiceImpl extends ServiceImpl<FirstVisitAssessmentTableMapper, FirstVisitAssessmentTable> implements IFirstVisitAssessmentTableService {

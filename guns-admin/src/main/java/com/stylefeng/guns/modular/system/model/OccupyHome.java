@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -16,60 +19,76 @@ import java.io.Serializable;
  * @since 2019-04-29
  */
 @TableName("face_occupy_home")
+@ApiModel(value = "居家养老信息Model")
 public class OccupyHome extends Model<OccupyHome> {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty("OccupyHome_id")
     private Integer id;
     /**
      * 老人类别(0特困老人  1低保老人  2建档立卡贫困老人优抚对象  3失独老人  4残疾老人 
 5计划生育特殊家庭成员  6其他 7空巢老人  8农村留守老人_)
      */
     @TableField("occupy_home_type")
+    @ApiModelProperty("老人类别(0特困老人  1低保老人  2建档立卡贫困老人优抚对象  3失独老人  4残疾老人 \n" +
+            "5计划生育特殊家庭成员  6其他 7空巢老人  8农村留守老人_)")
     private String occupyHomeType;
     /**
      * 政府购买对象(0 70岁以上享受城乡低保待遇  1 80岁以上重点优抚对象 2 80岁以上失独老人)
      */
     @TableField("occupy_home_government_purchases")
+    @ApiModelProperty("政府购买对象(0 70岁以上享受城乡低保待遇  1 80岁以上重点优抚对象 2 80岁以上失独老人)")
     private String occupyHomeGovernmentPurchases;
     /**
      * 达到标准1(0介助   1介护)
      */
     @TableField("occupy_home_up_standard1")
+    @ApiModelProperty("达到标准1(0介助   1介护)")
     private String occupyHomeUpStandard1;
     /**
      * 达到标准2(0介助   1介护)
      */
     @TableField("occupy_home_up_standard2")
+    @ApiModelProperty("达到标准2(0介助   1介护)")
     private String occupyHomeUpStandard2;
     /**
      * 是否为政府购买对象(0 是 1否)
      */
     @TableField("occupy_home_government_to_buy")
+    @ApiModelProperty("是否为政府购买对象(0 是 1否)")
     private String occupyHomeGovernmentToBuy;
     /**
      * 期望养老模式(0居家养老      1社区养老      2机构养老      3其他)
      */
+    @ApiModelProperty("期望养老模式(0居家养老      1社区养老      2机构养老      3其他)")
     @TableField("occupy_home_expect_pension")
     private String occupyHomeExpectPension;
     /**
      * 期望的服务(0家政服务 1生活照料 2健康咨询  3精神慰藉  4陪同就医  5换季服务 )
      */
+    @ApiModelProperty("期望的服务(0家政服务 1生活照料 2健康咨询  3精神慰藉  4陪同就医  5换季服务 )")
     @TableField("occupy_home_expect_server")
     private String occupyHomeExpectServer;
+    @ApiModelProperty(hidden = true)
     private String createtime;
+    @ApiModelProperty(hidden = true)
     private String createuserid;
+    @ApiModelProperty(hidden = true)
     private Integer deptid;
+    @ApiModelProperty("InfomationPersonal_id")
     private Integer parentId;
     /**
      * 老人类别其他对应文本
      */
+    @ApiModelProperty("老人类别其他对应文本")
     @TableField("occupy_home_type_other_text")
     private String occupyHomeTypeOtherText;
     /**
      * 期望养老模式其他类型对应文本
      */
+    @ApiModelProperty("期望养老模式其他类型对应文本")
     @TableField("occupy_home_expect_pension_other_text")
     private String occupyHomeExpectPensionOtherText;
 

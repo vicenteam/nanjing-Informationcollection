@@ -15,6 +15,8 @@ public class BaseController {
     private final Logger log = LoggerFactory.getLogger(BaseController.class);
     public Map<String, Object> bodyParameters = new HashMap<>();
 
+    public static final String  IMG_RESOUCE="https://hybc.ikeek.cn:8443/kaptcha/";
+
 
     /**
      * 使用@ExceptionHandler注解，继承此类的Controller发生异常时会自动执行该方法

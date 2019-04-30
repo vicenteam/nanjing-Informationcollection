@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author stylefeng
- * @since 2019-04-29
+ * @since 2019-04-30
  */
 public interface FirstVisitAssessmentTableMapper extends BaseMapper<FirstVisitAssessmentTable> {
 

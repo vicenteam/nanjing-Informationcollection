@@ -1,0 +1,48 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="secondvisitName" name="姓名" value="${item.secondvisitName}" underline="true"/>
+                            <#input id="secondvisitSex" name="性别(0男 1女)" value="${item.secondvisitSex}" underline="true"/>
+                            <#input id="secondvisitIdcard" name="身份证" value="${item.secondvisitIdcard}" underline="true"/>
+                            <#input id="secondvisitAge" name="年龄" value="${item.secondvisitAge}" underline="true"/>
+                            <#input id="secondvisitOthercard" name="社保卡号" value="${item.secondvisitOthercard}" underline="true"/>
+                            <#input id="secondvisitEthnic" name="名族(0汉族 1其他)" value="${item.secondvisitEthnic}" underline="true"/>
+                            <#input id="secondvisitLevelOfEducation" name="教育水平(1文盲 2小学 3初中 4高中/技校/中专 5大学专科及以上 6不详)" value="${item.secondvisitLevelOfEducation}" underline="true"/>
+                            <#input id="secondvisitMaritalStatus" name="婚姻状况(1未婚   2 已婚   3丧偶   4离婚   5未说明的婚姻状况)" value="${item.secondvisitMaritalStatus}" underline="true"/>
+                            <#input id="secondvisitAddress" name="居住地址" value="${item.secondvisitAddress}" underline="true"/>
+                            <#input id="secondvisitHomePhone" name="住宅电话" value="${item.secondvisitHomePhone}" underline="true"/>
+                            <#input id="secondvisitPhoneNumber" name="手机号码" value="${item.secondvisitPhoneNumber}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="secondvisitLivingSituation" name="居住情况(1独自居住  2 与配偶居住  3 与子女居住  4 其他 )" value="${item.secondvisitLivingSituation}" underline="true"/>
+                            <#input id="secondvisitMedical" name="医疗费用支付方式(1城镇职工基本医疗保险  2城镇居民基本医疗保险  3新型农村合作医疗  4贫困救助  5商业医疗保险  6全公费  7全自费  8其他)" value="${item.secondvisitMedical}" underline="true"/>
+                            <#input id="secondvisitVisitObjectCategories" name="走访对象类别(1低保  2低收入  3建档立卡贫困老人  4重点优抚对象)" value="${item.secondvisitVisitObjectCategories}" underline="true"/>
+                            <#input id="secondvisitExpectationsPension" name="期望的养老模式(0居家养老   1社区养老   2机构养老   3其他)" value="${item.secondvisitExpectationsPension}" underline="true"/>
+                            <#input id="secondvisitExpectationsPensionServer" name="期望的养老服务(0家政服务 1生活照料 2健康咨询 3精神慰藉 4陪同就医 5换季服务 6助浴服务 7助残服务 8助洁服务 9助餐服务 10 助行服务 11定制服务)" value="${item.secondvisitExpectationsPensionServer}" underline="true"/>
+                            <#input id="createtime" name="" value="${item.createtime}" underline="true"/>
+                            <#input id="createuserid" name="" value="${item.createuserid}" underline="true"/>
+                            <#input id="deptid" name="" value="${item.deptid}" underline="true"/>
+                            <#input id="faceIdentifyTopId" name="" value="${item.faceIdentifyTopId}" underline="true"/>
+                            <#input id="secondvisitMedicalOtherText" name="医疗支付方式其他对应文本" value="${item.secondvisitMedicalOtherText}" underline="true"/>
+                            <#input id="secondvisitExpectationsPensionOtherText" name="期望的养老模式其他选择对应文本" value="${item.secondvisitExpectationsPensionOtherText}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SecondVisitAssessmentTableInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SecondVisitAssessmentTableInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/secondVisitAssessmentTable/secondVisitAssessmentTable_info.js"></script>
+@}

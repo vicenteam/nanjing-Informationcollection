@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.api.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
@@ -52,7 +53,7 @@ public class ApiLivingConditionController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ApiOperation("编辑采集人生活居住状况及社会关系")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "id", value = "id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "id", value = "LivingCondition_id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "liveState", value = "居住状态(1其他情况,2与子女居住,3与配偶居住,4独居)", paramType = "query"),
             @ApiImplicitParam(required = true, name = "needHlep", value = "是否特困或者失能（1是，2否）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "firstHlep", value = "是否重点优抚（1是，2否）", paramType = "query"),
@@ -68,5 +69,16 @@ public class ApiLivingConditionController extends BaseController {
         informationPersonalResponseData.setDataCollection(livingCondition);
         return informationPersonalResponseData;
     }
-
+    @RequestMapping(value = "/getData", method = RequestMethod.POST)
+    @ApiOperation("获取采集人生活居住状况及社会关系")
+    @ApiImplicitParams({
+            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+    })
+    public ResponseData<LivingCondition> getData(Integer parentId) throws Exception {
+        ResponseData<LivingCondition> informationPersonalResponseData = new ResponseData<>();
+        EntityWrapper<LivingCondition> informationPersonalEntityWrapper = new EntityWrapper<>();
+        informationPersonalEntityWrapper.eq("parentId",parentId);
+        informationPersonalResponseData.setDataCollection(livingConditionService.selectOne(informationPersonalEntityWrapper));
+        return informationPersonalResponseData;
+    }
 }

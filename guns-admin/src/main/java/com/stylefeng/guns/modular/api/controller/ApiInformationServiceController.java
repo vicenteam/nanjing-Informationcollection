@@ -1,10 +1,12 @@
 package com.stylefeng.guns.modular.api.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
 import com.stylefeng.guns.modular.face.service.IInformationPersonalService;
 import com.stylefeng.guns.modular.face.service.IInformationServiceService;
+import com.stylefeng.guns.modular.system.model.InformationHealth;
 import com.stylefeng.guns.modular.system.model.InformationPersonal;
 import com.stylefeng.guns.modular.system.model.InformationService;
 import io.swagger.annotations.Api;
@@ -54,7 +56,7 @@ public class ApiInformationServiceController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ApiOperation("编辑采集人服务信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "id", value = "id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "id", value = "InformationService_id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "serviceType", value = "服务类型（1.信息服务，2.实体服务）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "phoneMeal", value = "用户手机套餐", paramType = "query"),
             @ApiImplicitParam(required = true, name = "phoneType", value = "用户手机型号", paramType = "query"),
@@ -69,6 +71,18 @@ public class ApiInformationServiceController extends BaseController {
         informationService.setCreateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         iInformationServiceService.updateById(informationService);
         informationPersonalResponseData.setDataCollection(informationService);
+        return informationPersonalResponseData;
+    }
+    @RequestMapping(value = "/getData", method = RequestMethod.POST)
+    @ApiOperation("获取采集人服务信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+    })
+    public ResponseData<InformationService> getData(Integer parentId) throws Exception {
+        ResponseData<InformationService> informationPersonalResponseData = new ResponseData<>();
+        EntityWrapper<InformationService> informationPersonalEntityWrapper = new EntityWrapper<>();
+        informationPersonalEntityWrapper.eq("parentId",parentId);
+        informationPersonalResponseData.setDataCollection(iInformationServiceService.selectOne(informationPersonalEntityWrapper));
         return informationPersonalResponseData;
     }
 }

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -13,164 +16,215 @@ import java.io.Serializable;
  * </p>
  *
  * @author stylefeng
- * @since 2019-04-29
+ * @since 2019-04-30
  */
 @TableName("face_first_visit_assessment_table")
+@ApiModel(value = "首次走访基础信息采集Model")
 public class FirstVisitAssessmentTable extends Model<FirstVisitAssessmentTable> {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty("FirstVisitAssessmentTable_id")
     private Integer id;
     /**
      * 所在社区1
      */
+    @ApiModelProperty("所在社区县（区）")
     @TableField("firstvisit_community_1")
     private String firstvisitCommunity1;
+    @ApiModelProperty("街道（乡镇）")
     @TableField("firstvisit_community_2")
     private String firstvisitCommunity2;
+    @ApiModelProperty("社区（村居）")
     @TableField("firstvisit_community_3")
     private String firstvisitCommunity3;
     /**
      * 姓名
      */
+    @ApiModelProperty("姓名")
     @TableField("firstvisit_name")
     private String firstvisitName;
     /**
      * 性别
      */
+    @ApiModelProperty("性别")
     @TableField("firstvisit_sex")
     private String firstvisitSex;
     /**
      * 文化程度
      */
+    @ApiModelProperty("文化程度")
     @TableField("firstvisit_level_education")
     private String firstvisitLevelEducation;
     /**
      * 身份证号码
      */
+    @ApiModelProperty("身份证号码")
     @TableField("firstvisit_idcard")
     private String firstvisitIdcard;
     /**
      * 社会保障卡号
      */
+    @ApiModelProperty("社会保障卡号")
     @TableField("firstvisit_othercard")
     private String firstvisitOthercard;
     /**
      * 联系电话
      */
+    @ApiModelProperty("联系电话")
     @TableField("firstvisit_phone")
     private String firstvisitPhone;
     /**
      * 居住地址
      */
+    @ApiModelProperty("居住地址")
     @TableField("firstvisit_residential_address")
     private String firstvisitResidentialAddress;
     /**
      * 常住时间( 0 :1年以下 1: 1-3年  2 :3年以上)
      */
+    @ApiModelProperty("常住时间( 0 :1年以下 1: 1-3年  2 :3年以上)")
     @TableField("firstvisit_residential_time")
     private String firstvisitResidentialTime;
     /**
      * 紧急联系人(,号隔开 共计4次)
      */
+    @ApiModelProperty("紧急联系人(,号隔开 共计4次)")
     @TableField("firstvisit_emergency_contact")
     private String firstvisitEmergencyContact;
     /**
      * 原职业(0公务员 1军人 2事业职工 3企业职工 4农民 5其它职业 6无职业)
      */
+    @ApiModelProperty("原职业(0公务员 1军人 2事业职工 3企业职工 4农民 5其它职业 6无职业)")
     @TableField("firstvisit_professional")
     private String firstvisitProfessional;
     /**
      * 人员类别(0离休 1退休 2低保户 3低保边缘户 4城市三无 5农村五保 6供养人员 7其他)
      */
+    @ApiModelProperty("人员类别(0离休 1退休 2低保户 3低保边缘户 4城市三无 5农村五保 6供养人员 7其他)")
     @TableField("firstvisit_category")
     private String firstvisitCategory;
     /**
      * 经济来源(0离休金/退休金 1养老保险 2子女补贴 3亲友资助 4低保金 5供养人员补贴拆迁补助 6失地农民补助 7其他              （    元/月）)
      */
+    @ApiModelProperty("经济来源(0离休金/退休金 1养老保险 2子女补贴 3亲友资助 4低保金 5供养人员补贴拆迁补助 6失地农民补助 7其他  （    元/月）)")
     @TableField("firstvisit_economic_sources")
     private String firstvisitEconomicSources;
     /**
      * 婚姻状况(0未婚  1已婚  2丧偶  3离婚  4未说明的婚姻状况)
      */
+    @ApiModelProperty("婚姻状况(0未婚  1已婚  2丧偶  3离婚  4未说明的婚姻状况)")
     @TableField("firstvisit_marital")
     private String firstvisitMarital;
     /**
      * 子女状况(0有子女 1无子女)
      */
+    @ApiModelProperty("子女状况(0有子女 1无子女)")
     @TableField("firstvisit_children")
     private String firstvisitChildren;
     /**
      * 医疗类别(0公费 1职工医保 2居民医保 3新农合 4自费)
      */
+    @ApiModelProperty("医疗类别(0公费 1职工医保 2居民医保 3新农合 4自费)")
     @TableField("firstvisit_medical_category")
     private String firstvisitMedicalCategory;
     /**
      * 居住状况(0独居 1空巢（与配偶/伴侣居住） 2与子女居住 3与其他亲属（含父母、兄弟姐妹等）居住 4与非亲属关系的居住 5养老机构)
      */
+    @ApiModelProperty("居住状况(0独居 1空巢（与配偶/伴侣居住） 2与子女居住 3与其他亲属（含父母、兄弟姐妹等）居住 4与非亲属关系的居住 5养老机构)")
     @TableField("firstvisit_living")
     private String firstvisitLiving;
     /**
      * 是否自有房屋：0是1否
      */
+    @ApiModelProperty("是否自有房屋：0是1否")
     @TableField("firstvisit_living_house")
     private String firstvisitLivingHouse;
     /**
      * 楼层电梯：0有1无
      */
     @TableField("firstvisit_living_elevator")
+    @ApiModelProperty("楼层电梯：0有1无")
     private String firstvisitLivingElevator;
     /**
      * 居住楼层(无电梯的)：0一层 1二层 2三层以上；
      */
+    @ApiModelProperty("居住楼层(无电梯的)：0一层 1二层 2三层以上；")
     @TableField("firstvisit_living_layer")
     private String firstvisitLivingLayer;
     /**
      * 室内厕所：0有1无；
      */
+    @ApiModelProperty("室内厕所：0有1无；")
     @TableField("firstvisit_living_toilet")
     private String firstvisitLivingToilet;
     /**
      * 室内洗浴设备：0有1无
      */
+    @ApiModelProperty("室内洗浴设备：0有1无")
     @TableField("firstvisit_living_bathing_facilities")
     private String firstvisitLivingBathingFacilities;
     /**
-     * 0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他
+     * 原照料情况 0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他
      */
+    @ApiModelProperty("原照料情况 0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他")
     @TableField("firstvisit_original_care_situation")
-    private String firstvisitOriginalcareSituation;
+    private String firstvisitOriginalCareSituation;
     /**
      * 服务需求(0家务料理  1代购物品 2康复保健  3紧急呼叫  4心理关爱  5法律援助  6文化娱乐 7助餐  8送餐  9陪聊  10陪住  11陪外出  12日托  13入住老年人福利机构; 14其他:)
      */
+    @ApiModelProperty("服务需求(0家务料理  1代购物品 2康复保健  3紧急呼叫  4心理关爱  5法律援助  6文化娱乐 7助餐  8送餐  9陪聊  10陪住  11陪外出  12日托  13入住老年人福利机构; 14其他:)")
     @TableField("firstvisit_service")
     private String firstvisitService;
     /**
      * 身体状况单选(0健康 1重病 2慢性病 )
      */
+    @ApiModelProperty("身体状况单选(0健康 1重病 2慢性病 )")
     @TableField("firstvisit_physical_condition_radio")
     private String firstvisitPhysicalConditionRadio;
     /**
      * 身体状况多选(0恶性肿瘤 1尿毒症透析 2器官移植(含手术后的抗排异治疗) 3白血病 4急性心肌梗塞 5脑中风 6急性坏死性胰腺炎 7脑外伤 8主动脉手术 9冠状动脉旁路手术 10慢性肾功能性衰竭 11急慢性重症肝炎 12危及生命的良性脑瘤 13重症糖尿病 14消化道出血 15系统性红斑狼疮 16慢性再生障碍性贫血 17血友病 18重病精神病  19高血压 20冠心病 21前列腺增生 22糖尿病 23其他   )
      */
+    @ApiModelProperty("身体状况多选(0恶性肿瘤 1尿毒症透析 2器官移植(含手术后的抗排异治疗) 3白血病 4急性心肌梗塞 5脑中风 6急性坏死性胰腺炎 7脑外伤 8主动脉手术 9冠状动脉旁路手术 10慢性肾功能性衰竭 11急慢性重症肝炎 12危及生命的良性脑瘤 13重症糖尿病 14消化道出血 15系统性红斑狼疮 16慢性再生障碍性贫血 17血友病 18重病精神病  19高血压 20冠心病 21前列腺增生 22糖尿病 23其他   )")
     @TableField("firstvisit_physical_condition_checkbox")
     private String firstvisitPhysicalConditionCheckbox;
     /**
      * 心理状况(0正常  1偶有孤独感  2经常觉得很孤独)
      */
+    @ApiModelProperty("心理状况(0正常  1偶有孤独感  2经常觉得很孤独)")
     @TableField("firstvisit_psychological")
     private String firstvisitPsychological;
     /**
      * 社会活动(0 经常 1偶尔 2从不)
      */
+    @ApiModelProperty("社会活动(0 经常 1偶尔 2从不)")
     @TableField("firstvisit_social_activities")
     private String firstvisitSocialActivities;
     /**
      * 社会活动类型：0文娱类 1教育类 2健身类 3慈善类 4经济类 5宗教类 6其他
      */
+    @ApiModelProperty("社会活动类型：0文娱类 1教育类 2健身类 3慈善类 4经济类 5宗教类 6其他")
     @TableField("firstvisit_social_activities_type")
     private String firstvisitSocialActivitiesType;
+    /**
+     * 经济来源其他对应文本
+     */
+    @ApiModelProperty("经济来源其他对应文本")
+    @TableField("firstvisit_economic_sources_other_text")
+    private String firstvisitEconomicSourcesOtherText;
+    /**
+     * 身体状况其他对应文本
+     */
+    @ApiModelProperty("身体状况其他对应文本")
+    @TableField("firstvisit_physical_condition_checkbox_other_text")
+    private String firstvisitPhysicalConditionCheckboxOtherText;
+    /**
+     * identifytop_id
+     */
+    @ApiModelProperty("identifytop_id")
+    @TableField("face_identify_top_id")
+    private Integer faceIdentifyTopId;
 
 
     public Integer getId() {
@@ -373,13 +427,12 @@ public class FirstVisitAssessmentTable extends Model<FirstVisitAssessmentTable> 
         this.firstvisitLivingBathingFacilities = firstvisitLivingBathingFacilities;
     }
 
-
-    public String getFirstvisitOriginalcareSituation() {
-        return firstvisitOriginalcareSituation;
+    public String getFirstvisitOriginalCareSituation() {
+        return firstvisitOriginalCareSituation;
     }
 
-    public void setFirstvisitOriginalcareSituation(String firstvisitOriginalcareSituation) {
-        this.firstvisitOriginalcareSituation = firstvisitOriginalcareSituation;
+    public void setFirstvisitOriginalCareSituation(String firstvisitOriginalCareSituation) {
+        this.firstvisitOriginalCareSituation = firstvisitOriginalCareSituation;
     }
 
     public String getFirstvisitService() {
@@ -430,6 +483,30 @@ public class FirstVisitAssessmentTable extends Model<FirstVisitAssessmentTable> 
         this.firstvisitSocialActivitiesType = firstvisitSocialActivitiesType;
     }
 
+    public String getFirstvisitEconomicSourcesOtherText() {
+        return firstvisitEconomicSourcesOtherText;
+    }
+
+    public void setFirstvisitEconomicSourcesOtherText(String firstvisitEconomicSourcesOtherText) {
+        this.firstvisitEconomicSourcesOtherText = firstvisitEconomicSourcesOtherText;
+    }
+
+    public String getFirstvisitPhysicalConditionCheckboxOtherText() {
+        return firstvisitPhysicalConditionCheckboxOtherText;
+    }
+
+    public void setFirstvisitPhysicalConditionCheckboxOtherText(String firstvisitPhysicalConditionCheckboxOtherText) {
+        this.firstvisitPhysicalConditionCheckboxOtherText = firstvisitPhysicalConditionCheckboxOtherText;
+    }
+
+    public Integer getFaceIdentifyTopId() {
+        return faceIdentifyTopId;
+    }
+
+    public void setFaceIdentifyTopId(Integer faceIdentifyTopId) {
+        this.faceIdentifyTopId = faceIdentifyTopId;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -463,12 +540,16 @@ public class FirstVisitAssessmentTable extends Model<FirstVisitAssessmentTable> 
         ", firstvisitLivingLayer=" + firstvisitLivingLayer +
         ", firstvisitLivingToilet=" + firstvisitLivingToilet +
         ", firstvisitLivingBathingFacilities=" + firstvisitLivingBathingFacilities +
+        ", firstvisitOriginalCareSituation=" + firstvisitOriginalCareSituation +
         ", firstvisitService=" + firstvisitService +
         ", firstvisitPhysicalConditionRadio=" + firstvisitPhysicalConditionRadio +
         ", firstvisitPhysicalConditionCheckbox=" + firstvisitPhysicalConditionCheckbox +
         ", firstvisitPsychological=" + firstvisitPsychological +
         ", firstvisitSocialActivities=" + firstvisitSocialActivities +
         ", firstvisitSocialActivitiesType=" + firstvisitSocialActivitiesType +
+        ", firstvisitEconomicSourcesOtherText=" + firstvisitEconomicSourcesOtherText +
+        ", firstvisitPhysicalConditionCheckboxOtherText=" + firstvisitPhysicalConditionCheckboxOtherText +
+        ", faceIdentifyTopId=" + faceIdentifyTopId +
         "}";
     }
 }

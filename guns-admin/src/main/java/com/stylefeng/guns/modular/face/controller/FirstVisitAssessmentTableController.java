@@ -16,10 +16,10 @@ import com.stylefeng.guns.modular.system.model.FirstVisitAssessmentTable;
 import com.stylefeng.guns.modular.face.service.IFirstVisitAssessmentTableService;
 
 /**
- * 基础信息控制器
+ * 首次走访信息控制器
  *
  * @author fengshuonan
- * @Date 2019-04-29 15:22:49
+ * @Date 2019-04-30 14:06:08
  */
 @Controller
 @RequestMapping("/firstVisitAssessmentTable")
@@ -31,7 +31,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     private IFirstVisitAssessmentTableService firstVisitAssessmentTableService;
 
     /**
-     * 跳转到基础信息首页
+     * 跳转到首次走访信息首页
      */
     @RequestMapping("")
     public String index() {
@@ -39,7 +39,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 跳转到添加基础信息
+     * 跳转到添加首次走访信息
      */
     @RequestMapping("/firstVisitAssessmentTable_add")
     public String firstVisitAssessmentTableAdd() {
@@ -47,7 +47,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 跳转到修改基础信息
+     * 跳转到修改首次走访信息
      */
     @RequestMapping("/firstVisitAssessmentTable_update/{firstVisitAssessmentTableId}")
     public String firstVisitAssessmentTableUpdate(@PathVariable Integer firstVisitAssessmentTableId, Model model) {
@@ -58,7 +58,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 获取基础信息列表
+     * 获取首次走访信息列表
      */
     @RequestMapping(value = "/list")
     @ResponseBody
@@ -70,7 +70,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 新增基础信息
+     * 新增首次走访信息
      */
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -80,7 +80,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 删除基础信息
+     * 删除首次走访信息
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
@@ -90,7 +90,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 修改基础信息
+     * 修改首次走访信息
      */
     @RequestMapping(value = "/update")
     @ResponseBody
@@ -100,7 +100,7 @@ public class FirstVisitAssessmentTableController extends BaseController {
     }
 
     /**
-     * 基础信息详情
+     * 首次走访信息详情
      */
     @RequestMapping(value = "/detail/{firstVisitAssessmentTableId}")
     @ResponseBody

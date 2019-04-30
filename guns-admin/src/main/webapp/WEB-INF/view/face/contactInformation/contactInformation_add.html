@@ -1,0 +1,56 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" underline="true"/>
+                            <#input id="contactInformationVolunteers1" name="志愿者一" underline="true"/>
+                            <#input id="contactInformationVolunteers1Phone" name="志愿者一电话" underline="true"/>
+                            <#input id="contactInformationVolunteers2" name="" underline="true"/>
+                            <#input id="contactInformationVolunteers2Phone" name="" underline="true"/>
+                            <#input id="contactInformationVolunteers3" name="" underline="true"/>
+                            <#input id="contactInformationVolunteers3Phone" name="" underline="true"/>
+                            <#input id="contactInformationSpouseName" name="配偶紧急联系人一 姓名" underline="true"/>
+                            <#input id="contactInformationSpouseRelationship" name="关系" underline="true"/>
+                            <#input id="contactInformationSpouseSex" name="性别" underline="true"/>
+                            <#input id="contactInformationSpouseAge" name="年龄" underline="true"/>
+                            <#input id="contactInformationSpouseEthnic" name="名族" underline="true"/>
+                            <#input id="contactInformationSpouseIdcard" name="身份证" underline="true"/>
+                            <#input id="contactInformationSpouseResidence" name="户口所在地" underline="true"/>
+                            <#input id="contactInformationSpousePhone" name="联 系 电 话" underline="true"/>
+                            <#input id="contactInformationSpouseAddress" name="联 系 地 址"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="contactInformationContact2Name" name="姓  名" underline="true"/>
+                            <#input id="contactInformationContact2Relationship" name="关系" underline="true"/>
+                            <#input id="contactInformationContact2Sex" name="性别" underline="true"/>
+                            <#input id="contactInformationContact2Phone1" name="联系电话" underline="true"/>
+                            <#input id="contactInformationContact2Phone2" name="备用电话" underline="true"/>
+                            <#input id="contactInformationContact2Address" name="联系地址" underline="true"/>
+                            <#input id="contactInformationContact3Name" name="" underline="true"/>
+                            <#input id="contactInformationContact3Relationship" name="" underline="true"/>
+                            <#input id="contactInformationContact3Sex" name="" underline="true"/>
+                            <#input id="contactInformationContact3Phone1" name="" underline="true"/>
+                            <#input id="contactInformationContact3Phone2" name="" underline="true"/>
+                            <#input id="contactInformationContact3Address" name="" underline="true"/>
+                            <#input id="createtime" name="" underline="true"/>
+                            <#input id="createuserid" name="" underline="true"/>
+                            <#input id="deptid" name="" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ContactInformationInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ContactInformationInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/contactInformation/contactInformation_info.js"></script>
+@}

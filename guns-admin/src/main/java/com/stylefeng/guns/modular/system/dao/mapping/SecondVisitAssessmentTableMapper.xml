@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.SecondVisitAssessmentTableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.SecondVisitAssessmentTable">
+        <id column="id" property="id" />
+        <result column="secondvisit_name" property="secondvisitName" />
+        <result column="secondvisit_sex" property="secondvisitSex" />
+        <result column="secondvisit_idcard" property="secondvisitIdcard" />
+        <result column="secondvisit_age" property="secondvisitAge" />
+        <result column="secondvisit_othercard" property="secondvisitOthercard" />
+        <result column="secondvisit_ethnic" property="secondvisitEthnic" />
+        <result column="secondvisit_level_of_education" property="secondvisitLevelOfEducation" />
+        <result column="secondvisit_marital_status" property="secondvisitMaritalStatus" />
+        <result column="secondvisit_address" property="secondvisitAddress" />
+        <result column="secondvisit_home_phone" property="secondvisitHomePhone" />
+        <result column="secondvisit_phone_number" property="secondvisitPhoneNumber" />
+        <result column="secondvisit_living_situation" property="secondvisitLivingSituation" />
+        <result column="secondvisit_medical" property="secondvisitMedical" />
+        <result column="secondvisit_visit_object_categories" property="secondvisitVisitObjectCategories" />
+        <result column="secondvisit_expectations_pension" property="secondvisitExpectationsPension" />
+        <result column="secondvisit_expectations_pension_server" property="secondvisitExpectationsPensionServer" />
+        <result column="createtime" property="createtime" />
+        <result column="createuserid" property="createuserid" />
+        <result column="deptid" property="deptid" />
+        <result column="face_identify_top_id" property="faceIdentifyTopId" />
+        <result column="secondvisit_medical_other_text" property="secondvisitMedicalOtherText" />
+        <result column="secondvisit_expectations_pension_other_text" property="secondvisitExpectationsPensionOtherText" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, secondvisit_name, secondvisit_sex, secondvisit_idcard, secondvisit_age, secondvisit_othercard, secondvisit_ethnic, secondvisit_level_of_education, secondvisit_marital_status, secondvisit_address, secondvisit_home_phone, secondvisit_phone_number, secondvisit_living_situation, secondvisit_medical, secondvisit_visit_object_categories, secondvisit_expectations_pension, secondvisit_expectations_pension_server, createtime, createuserid, deptid, face_identify_top_id, secondvisit_medical_other_text, secondvisit_expectations_pension_other_text
+    </sql>
+
+</mapper>

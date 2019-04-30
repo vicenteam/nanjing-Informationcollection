@@ -1,11 +1,13 @@
 package com.stylefeng.guns.modular.api.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
 import com.stylefeng.guns.modular.face.service.IInformationHealthService;
 import com.stylefeng.guns.modular.face.service.ILivingConditionService;
 import com.stylefeng.guns.modular.system.model.InformationHealth;
+import com.stylefeng.guns.modular.system.model.InformationPersonal;
 import com.stylefeng.guns.modular.system.model.LivingCondition;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -54,7 +56,7 @@ public class ApiInformationHealthController extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ApiOperation("编辑采集人采集用户健康信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "id", value = "id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "id", value = "InformationHealth_id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "hearing", value = "听力（1.良好，2.一般，3.很大声才能听见，4.听不见）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "helpHear", value = "是否佩戴助听器（1.是，2.否）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "health", value = "病史（1.健康   2.高血压   3.糖尿病   4.冠心病   5.恶性肿瘤   6.结核病   7.肝炎   8.脑卒中  9.精神疾病  10.慢性阻塞性肺疾病  11.慢性支气管炎  12.帕金森综合症  13.腰椎间盘突出  14.阿尔茨海默病  15.心脏病  16.肺气肿  17.白内障  18.脑血栓  19.风湿病  20.脑中风  21.高脂血症  22.哮喘  23.意外伤害  24.其他_____）", paramType = "query"),
@@ -74,5 +76,17 @@ public class ApiInformationHealthController extends BaseController {
         informationPersonalResponseData.setDataCollection(informationHealth);
         return informationPersonalResponseData;
     }
-
+    @RequestMapping(value = "/getData", method = RequestMethod.POST)
+    @ApiOperation("获取采集人采集用户健康信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+    })
+    public ResponseData<InformationHealth> getData(Integer parentId) throws Exception {
+        ResponseData<InformationHealth> informationPersonalResponseData = new ResponseData<>();
+        EntityWrapper<InformationHealth> informationPersonalEntityWrapper = new EntityWrapper<>();
+        informationPersonalEntityWrapper.eq("parentId",parentId);
+        InformationHealth informationHealth = informationHealthService.selectOne(informationPersonalEntityWrapper);
+        informationPersonalResponseData.setDataCollection(informationHealth);
+        return informationPersonalResponseData;
+    }
 }

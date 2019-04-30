@@ -1,0 +1,56 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="contactInformationVolunteers1" name="志愿者一" value="${item.contactInformationVolunteers1}" underline="true"/>
+                            <#input id="contactInformationVolunteers1Phone" name="志愿者一电话" value="${item.contactInformationVolunteers1Phone}" underline="true"/>
+                            <#input id="contactInformationVolunteers2" name="" value="${item.contactInformationVolunteers2}" underline="true"/>
+                            <#input id="contactInformationVolunteers2Phone" name="" value="${item.contactInformationVolunteers2Phone}" underline="true"/>
+                            <#input id="contactInformationVolunteers3" name="" value="${item.contactInformationVolunteers3}" underline="true"/>
+                            <#input id="contactInformationVolunteers3Phone" name="" value="${item.contactInformationVolunteers3Phone}" underline="true"/>
+                            <#input id="contactInformationSpouseName" name="配偶紧急联系人一 姓名" value="${item.contactInformationSpouseName}" underline="true"/>
+                            <#input id="contactInformationSpouseRelationship" name="关系" value="${item.contactInformationSpouseRelationship}" underline="true"/>
+                            <#input id="contactInformationSpouseSex" name="性别" value="${item.contactInformationSpouseSex}" underline="true"/>
+                            <#input id="contactInformationSpouseAge" name="年龄" value="${item.contactInformationSpouseAge}" underline="true"/>
+                            <#input id="contactInformationSpouseEthnic" name="名族" value="${item.contactInformationSpouseEthnic}" underline="true"/>
+                            <#input id="contactInformationSpouseIdcard" name="身份证" value="${item.contactInformationSpouseIdcard}" underline="true"/>
+                            <#input id="contactInformationSpouseResidence" name="户口所在地" value="${item.contactInformationSpouseResidence}" underline="true"/>
+                            <#input id="contactInformationSpousePhone" name="联 系 电 话" value="${item.contactInformationSpousePhone}" underline="true"/>
+                            <#input id="contactInformationSpouseAddress" name="联 系 地 址" value="${item.contactInformationSpouseAddress}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="contactInformationContact2Name" name="姓  名" value="${item.contactInformationContact2Name}" underline="true"/>
+                            <#input id="contactInformationContact2Relationship" name="关系" value="${item.contactInformationContact2Relationship}" underline="true"/>
+                            <#input id="contactInformationContact2Sex" name="性别" value="${item.contactInformationContact2Sex}" underline="true"/>
+                            <#input id="contactInformationContact2Phone1" name="联系电话" value="${item.contactInformationContact2Phone1}" underline="true"/>
+                            <#input id="contactInformationContact2Phone2" name="备用电话" value="${item.contactInformationContact2Phone2}" underline="true"/>
+                            <#input id="contactInformationContact2Address" name="联系地址" value="${item.contactInformationContact2Address}" underline="true"/>
+                            <#input id="contactInformationContact3Name" name="" value="${item.contactInformationContact3Name}" underline="true"/>
+                            <#input id="contactInformationContact3Relationship" name="" value="${item.contactInformationContact3Relationship}" underline="true"/>
+                            <#input id="contactInformationContact3Sex" name="" value="${item.contactInformationContact3Sex}" underline="true"/>
+                            <#input id="contactInformationContact3Phone1" name="" value="${item.contactInformationContact3Phone1}" underline="true"/>
+                            <#input id="contactInformationContact3Phone2" name="" value="${item.contactInformationContact3Phone2}" underline="true"/>
+                            <#input id="contactInformationContact3Address" name="" value="${item.contactInformationContact3Address}" underline="true"/>
+                            <#input id="createtime" name="" value="${item.createtime}" underline="true"/>
+                            <#input id="createuserid" name="" value="${item.createuserid}" underline="true"/>
+                            <#input id="deptid" name="" value="${item.deptid}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ContactInformationInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ContactInformationInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/contactInformation/contactInformation_info.js"></script>
+@}

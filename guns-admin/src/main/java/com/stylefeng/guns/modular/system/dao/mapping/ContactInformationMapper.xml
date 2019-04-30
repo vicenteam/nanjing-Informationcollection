@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.ContactInformationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.ContactInformation">
+        <id column="id" property="id" />
+        <result column="contact_information_volunteers1" property="contactInformationVolunteers1" />
+        <result column="contact_information_volunteers1_phone" property="contactInformationVolunteers1Phone" />
+        <result column="contact_information_volunteers2" property="contactInformationVolunteers2" />
+        <result column="contact_information_volunteers2_phone" property="contactInformationVolunteers2Phone" />
+        <result column="contact_information_volunteers3" property="contactInformationVolunteers3" />
+        <result column="contact_information_volunteers3_phone" property="contactInformationVolunteers3Phone" />
+        <result column="contact_information_spouse_name" property="contactInformationSpouseName" />
+        <result column="contact_information_spouse_relationship" property="contactInformationSpouseRelationship" />
+        <result column="contact_information_spouse_sex" property="contactInformationSpouseSex" />
+        <result column="contact_information_spouse_age" property="contactInformationSpouseAge" />
+        <result column="contact_information_spouse_ethnic" property="contactInformationSpouseEthnic" />
+        <result column="contact_information_spouse_idcard" property="contactInformationSpouseIdcard" />
+        <result column="contact_information_spouse_residence" property="contactInformationSpouseResidence" />
+        <result column="contact_information_spouse_phone" property="contactInformationSpousePhone" />
+        <result column="contact_information_spouse_address" property="contactInformationSpouseAddress" />
+        <result column="contact_information_contact2_name" property="contactInformationContact2Name" />
+        <result column="contact_information_contact2_relationship" property="contactInformationContact2Relationship" />
+        <result column="contact_information_contact2_sex" property="contactInformationContact2Sex" />
+        <result column="contact_information_contact2_phone1" property="contactInformationContact2Phone1" />
+        <result column="contact_information_contact2_phone2" property="contactInformationContact2Phone2" />
+        <result column="contact_information_contact2_address" property="contactInformationContact2Address" />
+        <result column="contact_information_contact3_name" property="contactInformationContact3Name" />
+        <result column="contact_information_contact3_relationship" property="contactInformationContact3Relationship" />
+        <result column="contact_information_contact3_sex" property="contactInformationContact3Sex" />
+        <result column="contact_information_contact3_phone1" property="contactInformationContact3Phone1" />
+        <result column="contact_information_contact3_phone2" property="contactInformationContact3Phone2" />
+        <result column="contact_information_contact3_address" property="contactInformationContact3Address" />
+        <result column="createtime" property="createtime" />
+        <result column="createuserid" property="createuserid" />
+        <result column="deptid" property="deptid" />
+        <result column="parentId" property="parentId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, contact_information_volunteers1, contact_information_volunteers1_phone, contact_information_volunteers2, contact_information_volunteers2_phone, contact_information_volunteers3, contact_information_volunteers3_phone, contact_information_spouse_name, contact_information_spouse_relationship, contact_information_spouse_sex, contact_information_spouse_age, contact_information_spouse_ethnic, contact_information_spouse_idcard, contact_information_spouse_residence, contact_information_spouse_phone, contact_information_spouse_address, contact_information_contact2_name, contact_information_contact2_relationship, contact_information_contact2_sex, contact_information_contact2_phone1, contact_information_contact2_phone2, contact_information_contact2_address, contact_information_contact3_name, contact_information_contact3_relationship, contact_information_contact3_sex, contact_information_contact3_phone1, contact_information_contact3_phone2, contact_information_contact3_address, createtime, createuserid, deptid
+    </sql>
+
+</mapper>

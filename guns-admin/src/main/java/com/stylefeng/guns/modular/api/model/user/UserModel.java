@@ -12,9 +12,11 @@ public class UserModel {
     private Integer id;
     @ApiModelProperty("登录名称")
     private String account;
-    @ApiModelProperty("门店id")
+//    @ApiModelProperty("门店id")
+    @ApiModelProperty(hidden = true)
     private Integer deptid;
-    @ApiModelProperty("角色id")
+//    @ApiModelProperty("角色id")
+    @ApiModelProperty(hidden = true)
     private String roleid;
     @ApiModelProperty("姓名")
     private String name;
@@ -24,9 +26,11 @@ public class UserModel {
     private Integer sex;
     @ApiModelProperty("状态(1：启用  2：冻结  3：删除）")
     private Integer status;
-    @ApiModelProperty("门店名称")
+//    @ApiModelProperty("门店名称")
+    @ApiModelProperty(hidden = true)
     private String deptName;
-    @ApiModelProperty("角色资源")
+//    @ApiModelProperty("角色资源")
+    @ApiModelProperty(hidden = true)
     private List<UserResouceModel> userResouceModels=new ArrayList<>();
 
     private Integer userId;

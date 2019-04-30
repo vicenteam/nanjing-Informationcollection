@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author stylefeng
- * @since 2019-04-29
+ * @since 2019-04-30
  */
 public interface IFirstVisitAssessmentTableService extends IService<FirstVisitAssessmentTable> {
 

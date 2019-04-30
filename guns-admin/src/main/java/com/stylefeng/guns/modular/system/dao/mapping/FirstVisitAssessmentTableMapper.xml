@@ -29,18 +29,21 @@
         <result column="firstvisit_living_layer" property="firstvisitLivingLayer" />
         <result column="firstvisit_living_toilet" property="firstvisitLivingToilet" />
         <result column="firstvisit_living_bathing_facilities" property="firstvisitLivingBathingFacilities" />
-        <result column="firstvisit_original_ care_situation" property="firstvisitOriginal careSituation" />
+        <result column="firstvisit_original_care_situation" property="firstvisitOriginalCareSituation" />
         <result column="firstvisit_service" property="firstvisitService" />
         <result column="firstvisit_physical_condition_radio" property="firstvisitPhysicalConditionRadio" />
         <result column="firstvisit_physical_condition_checkbox" property="firstvisitPhysicalConditionCheckbox" />
         <result column="firstvisit_psychological" property="firstvisitPsychological" />
         <result column="firstvisit_social_activities" property="firstvisitSocialActivities" />
         <result column="firstvisit_social_activities_type" property="firstvisitSocialActivitiesType" />
+        <result column="firstvisit_economic_sources_other_text" property="firstvisitEconomicSourcesOtherText" />
+        <result column="firstvisit_physical_condition_checkbox_other_text" property="firstvisitPhysicalConditionCheckboxOtherText" />
+        <result column="face_identify_top_id" property="faceIdentifyTopId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, firstvisit_community_1, firstvisit_community_2, firstvisit_community_3, firstvisit_name, firstvisit_sex, firstvisit_level_education, firstvisit_idcard, firstvisit_othercard, firstvisit_phone, firstvisit_residential_address, firstvisit_residential_time, firstvisit_emergency_contact, firstvisit_professional, firstvisit_category, firstvisit_economic_sources, firstvisit_marital, firstvisit_children, firstvisit_medical_category, firstvisit_living, firstvisit_living_house, firstvisit_living_elevator, firstvisit_living_layer, firstvisit_living_toilet, firstvisit_living_bathing_facilities, firstvisit_original_ care_situation, firstvisit_service, firstvisit_physical_condition_radio, firstvisit_physical_condition_checkbox, firstvisit_psychological, firstvisit_social_activities, firstvisit_social_activities_type
+        id, firstvisit_community_1, firstvisit_community_2, firstvisit_community_3, firstvisit_name, firstvisit_sex, firstvisit_level_education, firstvisit_idcard, firstvisit_othercard, firstvisit_phone, firstvisit_residential_address, firstvisit_residential_time, firstvisit_emergency_contact, firstvisit_professional, firstvisit_category, firstvisit_economic_sources, firstvisit_marital, firstvisit_children, firstvisit_medical_category, firstvisit_living, firstvisit_living_house, firstvisit_living_elevator, firstvisit_living_layer, firstvisit_living_toilet, firstvisit_living_bathing_facilities, firstvisit_original_care_situation, firstvisit_service, firstvisit_physical_condition_radio, firstvisit_physical_condition_checkbox, firstvisit_psychological, firstvisit_social_activities, firstvisit_social_activities_type, firstvisit_economic_sources_other_text, firstvisit_physical_condition_checkbox_other_text, face_identify_top_id
     </sql>
 
 </mapper>

@@ -1,0 +1,35 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" underline="true"/>
+                            <#input id="tableid" name="所属表单" underline="true"/>
+                            <#input id="vmediaurl" name="视频图片地址（ ,  逗号隔开）" underline="true"/>
+                            <#input id="smediaurl" name="音频媒体资源名称" underline="true"/>
+                            <#input id="imgurl" name="签名图片url名称"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="createtime" name="创建时间" underline="true"/>
+                            <#input id="updatetime" name="" underline="true"/>
+                            <#input id="status" name="资源来源状态 0第一次走访信息 1第二次走访信息" underline="true"/>
+                            <#input id="createuserid" name="创建人" underline="true"/>
+                            <#input id="deptid" name="" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="IdentiflMediaResouceInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="IdentiflMediaResouceInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/face/identiflMediaResouce/identiflMediaResouce_info.js"></script>
+@}

@@ -68,7 +68,7 @@ public class ApiLoginController extends BaseController {
             //数据库entity对象转model层对象
             UserModel change = new ReflectionObject<UserModel>().change(user, new UserModel());
             change.setUserId(change.getId());
-            change.setAvatar("http://47.104.252.44:8081/kaptcha/" + change.getAvatar());//上线更改地址
+            change.setAvatar(super.IMG_RESOUCE + change.getAvatar());//上线更改地址
             if (change.getDeptid() != null) {
                 Dept dept = deptService.selectById(change.getDeptid());
                 if (dept != null) change.setDeptName(dept.getFullname());
