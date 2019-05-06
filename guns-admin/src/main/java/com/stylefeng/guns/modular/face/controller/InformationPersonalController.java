@@ -46,6 +46,35 @@ public class InformationPersonalController extends BaseController {
         return PREFIX + "informationPersonal_add.html";
     }
 
+
+
+
+
+    @RequestMapping("/info/{val}")
+    public String info(@PathVariable Integer val, Model model) {
+        model.addAttribute("id",val);
+        return "/face/info/info.html";
+    }
+    @RequestMapping("/one/{val}")
+    public String one(@PathVariable Integer val) {
+
+        return "/face/one/one.html";
+    }
+    @RequestMapping("/two/{val}")
+    public String two(@PathVariable Integer val) {
+
+        return "/face/two/two.html";
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * 跳转到修改采集人基础信息
      */
@@ -54,7 +83,7 @@ public class InformationPersonalController extends BaseController {
         InformationPersonal informationPersonal = informationPersonalService.selectById(informationPersonalId);
         model.addAttribute("item",informationPersonal);
         LogObjectHolder.me().set(informationPersonal);
-        return PREFIX + "informationPersonal_edit.html";
+        return "/face/info/info.html";
     }
 
     /**
