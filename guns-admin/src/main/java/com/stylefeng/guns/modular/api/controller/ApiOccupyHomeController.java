@@ -43,7 +43,7 @@ public class ApiOccupyHomeController extends BaseController {
             @ApiImplicitParam(required = true, name = "occupyHomeExpectServer", value = "期望的服务(0家政服务 1生活照料 2健康咨询  3精神慰藉  4陪同就医  5换季服务 )", paramType = "query"),
             @ApiImplicitParam(required = true, name = "occupyHomeTypeOtherText", value = "老人类别其他对应文本"),
             @ApiImplicitParam(required = true, name = "occupyHomeExpectPensionOtherText", value = "期望养老模式其他类型对应文本"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<OccupyHome> add(OccupyHome occupyHome, int parentId) {
         ResponseData<OccupyHome> informationPersonalResponseData = new ResponseData<>();
@@ -65,7 +65,7 @@ public class ApiOccupyHomeController extends BaseController {
             @ApiImplicitParam(required = true, name = "occupyHomeExpectServer", value = "期望的服务(0家政服务 1生活照料 2健康咨询  3精神慰藉  4陪同就医  5换季服务 )", paramType = "query"),
             @ApiImplicitParam(required = true, name = "occupyHomeTypeOtherText", value = "老人类别其他对应文本" ),
             @ApiImplicitParam(required = true, name = "occupyHomeExpectPensionOtherText", value = "期望养老模式其他类型对应文本" ),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<OccupyHome> edit(OccupyHome occupyHome, int parentId) {
         ResponseData<OccupyHome> informationPersonalResponseData = new ResponseData<>();
@@ -77,7 +77,7 @@ public class ApiOccupyHomeController extends BaseController {
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人居家养老信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<OccupyHome> getData(Integer parentId) throws Exception {
         ResponseData<OccupyHome> informationPersonalResponseData = new ResponseData<>();

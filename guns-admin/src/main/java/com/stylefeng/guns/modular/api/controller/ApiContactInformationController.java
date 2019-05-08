@@ -58,7 +58,7 @@ public class ApiContactInformationController extends BaseController {
             @ApiImplicitParam(required = true, name = "contactInformationContact3Phone1", value = "急联系人三 电话"),
             @ApiImplicitParam(required = true, name = "contactInformationContact3Phone2", value = "急联系人三 备用电话"),
             @ApiImplicitParam(required = true, name = "contactInformationContact3Address", value = "急联系人三 地址"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id"),
     })
     public ResponseData<ContactInformation> add(ContactInformation contactInformation, int parentId) {
         ResponseData<ContactInformation> informationPersonalResponseData = new ResponseData<>();
@@ -99,7 +99,7 @@ public class ApiContactInformationController extends BaseController {
             @ApiImplicitParam(required = true, name = "contactInformationContact3Phone1", value = "急联系人三 电话"),
             @ApiImplicitParam(required = true, name = "contactInformationContact3Phone2", value = "急联系人三 备用电话"),
             @ApiImplicitParam(required = true, name = "contactInformationContact3Address", value = "急联系人三 地址"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id"),
     })
     public ResponseData<ContactInformation> edit(ContactInformation contactInformation, int parentId) {
         ResponseData<ContactInformation> informationPersonalResponseData = new ResponseData<>();
@@ -111,7 +111,7 @@ public class ApiContactInformationController extends BaseController {
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人紧急联系人")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<ContactInformation> getData(Integer parentId) throws Exception {
         ResponseData<ContactInformation> informationPersonalResponseData = new ResponseData<>();

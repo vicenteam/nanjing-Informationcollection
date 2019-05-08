@@ -15,6 +15,9 @@
         <result column="update_date" property="updateDate" />
         <result column="status" property="status" />
         <result column="parentId" property="parentId" />
+        <result column="pestype" property="pestype" />
+        <result column="pestypeothertext" property="pestypeothertext" />
+        <result column="liveStateOtherText" property="liveStateOtherText" />
     </resultMap>
 
     <!-- 通用查询结果列 -->

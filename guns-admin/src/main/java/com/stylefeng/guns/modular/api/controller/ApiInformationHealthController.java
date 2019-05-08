@@ -44,7 +44,7 @@ public class ApiInformationHealthController extends BaseController {
             @ApiImplicitParam(required = true, name = "ziLiType", value = "老人自理类别（1自理  2失能  3半失能  4失智  5轻度依赖  6重度依赖  7不能自理）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "allergyTypeOtherText", value = "过敏类型其他对应文本"),
             @ApiImplicitParam(required = true, name = "healthOtherText", value = "病史其他对应文本"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationHealth> add(InformationHealth informationHealth, int parentId) throws Exception {
         ResponseData<InformationHealth> informationPersonalResponseData = new ResponseData<>();
@@ -67,7 +67,7 @@ public class ApiInformationHealthController extends BaseController {
             @ApiImplicitParam(required = true, name = "ziLiType", value = "老人自理类别（1自理  2失能  3半失能  4失智  5轻度依赖  6重度依赖  7不能自理）", paramType = "query"),
             @ApiImplicitParam(required = true, name = "allergyTypeOtherText", value = "过敏类型其他对应文本"),
             @ApiImplicitParam(required = true, name = "healthOtherText", value = "病史其他对应文本"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationHealth> edit(InformationHealth informationHealth, int parentId) throws Exception {
         ResponseData<InformationHealth> informationPersonalResponseData = new ResponseData<>();
@@ -79,7 +79,7 @@ public class ApiInformationHealthController extends BaseController {
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人采集用户健康信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<InformationHealth> getData(Integer parentId) throws Exception {
         ResponseData<InformationHealth> informationPersonalResponseData = new ResponseData<>();

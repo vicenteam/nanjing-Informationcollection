@@ -77,7 +77,7 @@ public class OccupyHome extends Model<OccupyHome> {
     private String createuserid;
     @ApiModelProperty(hidden = true)
     private Integer deptid;
-    @ApiModelProperty("InfomationPersonal_id")
+    @ApiModelProperty("人脸识别&注册返回的 id (FaceIdentifyTop_id)")
     private Integer parentId;
     /**
      * 老人类别其他对应文本

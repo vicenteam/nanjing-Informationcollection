@@ -165,7 +165,7 @@ public class ContactInformation extends Model<ContactInformation> {
     private Integer createuserid;
     @ApiModelProperty(hidden = true)
     private Integer deptid;
-    @ApiModelProperty("InfomationPersonal_id")
+    @ApiModelProperty("人脸识别&注册返回的 id (FaceIdentifyTop_id)")
     private Integer parentId;
 
     public Integer getParentId() {

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 192.168.0.101
-Source Server Version : 50722
-Source Host           : 192.168.0.101:3306
+Source Server         :
+Source Server Version : 50723
+Source Host           :
 Source Database       : faceidentify
 
 Target Server Type    : MYSQL
-Target Server Version : 50722
+Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-02-15 17:30:48
+Date: 2019-05-08 11:18:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `face_contact_information`;
 CREATE TABLE `face_contact_information` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `contact_information_volunteers1` varchar(255) DEFAULT NULL COMMENT '志愿者一',
   `contact_information_volunteers1_phone` varchar(255) DEFAULT NULL COMMENT '志愿者一电话',
   `contact_information_volunteers2` varchar(255) DEFAULT NULL,
@@ -51,8 +51,9 @@ CREATE TABLE `face_contact_information` (
   `createtime` varchar(255) DEFAULT NULL,
   `createuserid` int(11) DEFAULT NULL,
   `deptid` int(11) DEFAULT NULL,
+  `parentId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='紧急联系人基础信息表';
 
 -- ----------------------------
 -- Records of face_contact_information
@@ -63,7 +64,7 @@ CREATE TABLE `face_contact_information` (
 -- ----------------------------
 DROP TABLE IF EXISTS `face_first_visit_assessment_table`;
 CREATE TABLE `face_first_visit_assessment_table` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstvisit_community_1` varchar(255) DEFAULT NULL COMMENT '所在社区1',
   `firstvisit_community_2` varchar(255) DEFAULT NULL,
   `firstvisit_community_3` varchar(255) DEFAULT NULL,
@@ -88,13 +89,16 @@ CREATE TABLE `face_first_visit_assessment_table` (
   `firstvisit_living_layer` varchar(255) DEFAULT NULL COMMENT '居住楼层(无电梯的)：0一层 1二层 2三层以上；',
   `firstvisit_living_toilet` varchar(255) DEFAULT NULL COMMENT '室内厕所：0有1无；',
   `firstvisit_living_bathing_facilities` varchar(255) DEFAULT NULL COMMENT '室内洗浴设备：0有1无',
-  `firstvisit_original_ care_situation` varchar(255) DEFAULT NULL COMMENT '0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他',
+  `firstvisit_original_care_situation` varchar(255) DEFAULT NULL COMMENT '原照料情况 0自我照料 1配偶照顾 2子女照顾 3自购家政服务 4送餐服务 5互助门铃 6居家照料 7紧急呼叫终端 8老年人意外伤害保险 9其他',
   `firstvisit_service` varchar(255) DEFAULT NULL COMMENT '服务需求(0家务料理  1代购物品 2康复保健  3紧急呼叫  4心理关爱  5法律援助  6文化娱乐 7助餐  8送餐  9陪聊  10陪住  11陪外出  12日托  13入住老年人福利机构; 14其他:)',
   `firstvisit_physical_condition_radio` varchar(255) DEFAULT NULL COMMENT '身体状况单选(0健康 1重病 2慢性病 )',
   `firstvisit_physical_condition_checkbox` varchar(255) DEFAULT NULL COMMENT '身体状况多选(0恶性肿瘤 1尿毒症透析 2器官移植(含手术后的抗排异治疗) 3白血病 4急性心肌梗塞 5脑中风 6急性坏死性胰腺炎 7脑外伤 8主动脉手术 9冠状动脉旁路手术 10慢性肾功能性衰竭 11急慢性重症肝炎 12危及生命的良性脑瘤 13重症糖尿病 14消化道出血 15系统性红斑狼疮 16慢性再生障碍性贫血 17血友病 18重病精神病  19高血压 20冠心病 21前列腺增生 22糖尿病 23其他   )',
   `firstvisit_psychological` varchar(255) DEFAULT NULL COMMENT '心理状况(0正常  1偶有孤独感  2经常觉得很孤独)',
   `firstvisit_social_activities` varchar(255) DEFAULT NULL COMMENT '社会活动(0 经常 1偶尔 2从不)',
   `firstvisit_social_activities_type` varchar(255) DEFAULT NULL COMMENT '社会活动类型：0文娱类 1教育类 2健身类 3慈善类 4经济类 5宗教类 6其他',
+  `firstvisit_economic_sources_other_text` varchar(255) DEFAULT NULL COMMENT '经济来源其他对应文本',
+  `firstvisit_physical_condition_checkbox_other_text` varchar(255) DEFAULT NULL COMMENT '身体状况其他对应文本',
+  `face_identify_top_id` int(11) DEFAULT NULL COMMENT 'identifytop_id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='首次走访基础信息采集表';
 
@@ -130,11 +134,12 @@ DROP TABLE IF EXISTS `face_identifl_media_resouce`;
 CREATE TABLE `face_identifl_media_resouce` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tableid` int(11) DEFAULT NULL COMMENT '所属表单',
-  `mediaurl` varchar(255) DEFAULT NULL COMMENT '媒体资源名称',
-  `imgurl` varchar(255) DEFAULT NULL COMMENT '图片url名称',
+  `vmediaurl` varchar(255) DEFAULT NULL COMMENT '视频图片地址（ ,  逗号隔开）',
+  `smediaurl` varchar(255) DEFAULT NULL COMMENT '音频媒体资源名称',
+  `imgurl` varchar(255) DEFAULT NULL COMMENT '签名图片url名称',
   `createtime` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `updatetime` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL COMMENT '资源来源状态 0第一次走访信息 1第二次走访信息',
   `createuserid` int(11) DEFAULT NULL COMMENT '创建人',
   `deptid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -159,33 +164,57 @@ CREATE TABLE `face_identify_top` (
   `status` int(11) DEFAULT '0',
   `updateuserid` varchar(255) DEFAULT NULL COMMENT '修改人id',
   `deptid` int(11) DEFAULT NULL,
+  `imgbase64` varchar(999) DEFAULT NULL COMMENT '采集信息base64图片字符串',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采集用户识别基础库';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='采集用户识别基础库';
 
 -- ----------------------------
 -- Records of face_identify_top
 -- ----------------------------
+INSERT INTO `face_identify_top` VALUES ('10', '2', '2', null, '2', null, null, '0', null, '2', '2');
+INSERT INTO `face_identify_top` VALUES ('11', '555', '555', null, '2019-04-30 10:41:21', null, null, '0', null, '39', '555_5ef885cf-27a0-486c-89e1-b41396609608.jpg');
+INSERT INTO `face_identify_top` VALUES ('12', '510123195455454541', '李四', null, '2019-04-30 23:46:28', null, null, '0', null, '0', '510123195455454541_50213b20-5088-47fe-a2a3-72ab52de5bf6.jpg');
+INSERT INTO `face_identify_top` VALUES ('13', '510123154544545245', '李四', null, '2019-04-30 23:52:59', null, null, '0', null, '0', '510123154544545245_62d89f6a-fecd-4716-ae9e-57a83edb0438.jpg');
+INSERT INTO `face_identify_top` VALUES ('14', '5101231943123541411', '李四', null, '2019-04-30 23:54:25', null, null, '0', null, '0', '5101231943123541411_cc50adc9-c80f-4792-84b7-8c3afe0e4866.jpg');
+INSERT INTO `face_identify_top` VALUES ('15', '5101256423345345124', '李四', null, '2019-04-30 23:55:24', null, null, '0', null, '0', '5101256423345345124_ad41d237-7001-49f9-acf4-2ebb592f652d.jpg');
+INSERT INTO `face_identify_top` VALUES ('16', '5101235504315343243', 'lisisd', null, '2019-04-30 23:56:42', null, null, '0', null, '0', '5101235504315343243_f761129f-4012-40e8-ba3d-6a33ce20c793.jpg');
+INSERT INTO `face_identify_top` VALUES ('17', '51242131232141241231', '刘鹗', null, '2019-05-01 14:22:52', null, null, '0', null, '0', '51242131232141241231_c5e1a0b9-0218-4de2-b1bb-9f3c12eb4046.jpg');
+INSERT INTO `face_identify_top` VALUES ('18', '351251241321423534', 'sdsd', null, '2019-05-01 14:29:22', null, null, '0', null, '0', '351251241321423534_dcb38b4c-4360-4f07-921b-f62a24dc8a2d.jpg');
+INSERT INTO `face_identify_top` VALUES ('19', '512413123123123123', 'dsds', null, '2019-05-01 15:01:02', null, null, '0', null, '0', '512413123123123123_4333034f-a946-4d01-84aa-6c31f90d7edf.jpg');
+INSERT INTO `face_identify_top` VALUES ('20', '17', '刘鹗', null, '2019-05-01 15:16:56', null, null, '0', null, '0', '17_0d2402b1-4de1-4372-9039-65b9d07a17e1.jpg');
+INSERT INTO `face_identify_top` VALUES ('21', '17', '刘鹗', null, '2019-05-01 15:20:14', null, null, '0', null, '0', '17_784e62cc-4749-47e2-9b6c-467b910f8840.jpg');
+INSERT INTO `face_identify_top` VALUES ('22', '17', '刘鹗', null, '2019-05-01 15:22:18', null, null, '0', null, '0', '17_007e5811-c061-458d-a8f0-5917d22ae80d.jpg');
+INSERT INTO `face_identify_top` VALUES ('23', '17', '刘鹗', null, '2019-05-01 15:22:54', null, null, '0', null, '0', '17_a6f3045d-100c-4a8b-8264-297da12d279c.jpg');
+INSERT INTO `face_identify_top` VALUES ('24', '17', '刘鹗', null, '2019-05-01 15:26:59', null, null, '0', null, '0', '17_1ebb809d-d445-40f0-b6b3-579b6c13e7ef.jpg');
+INSERT INTO `face_identify_top` VALUES ('25', '412301241241241232', '刘鹗', null, '2019-05-01 15:28:09', null, null, '0', null, '0', '412301241241241232_e0c5dead-2435-48ea-a42f-2819f4f4d622.jpg');
+INSERT INTO `face_identify_top` VALUES ('26', '512032312312312312', '刘鹗', null, '2019-05-02 13:40:14', null, null, '0', null, '0', '512032312312312312_66b6bd92-9852-4d1d-9683-3d2df385f977.jpg');
+INSERT INTO `face_identify_top` VALUES ('27', '17', '刘鹗', null, '2019-05-02 13:50:11', null, null, '0', null, '0', '17_8c305c92-c489-481f-8b39-ba4b2da80bf3.jpg');
+INSERT INTO `face_identify_top` VALUES ('28', '17', '刘鹗', null, '2019-05-02 14:08:23', null, null, '0', null, '0', '17_3102db55-d68f-430a-8d3e-1917c7ee7b25.jpg');
+INSERT INTO `face_identify_top` VALUES ('29', '17', '刘鹗', null, '2019-05-02 14:09:04', null, null, '0', null, '0', '17_d64924c1-2d7a-4d36-8fb6-87ceb813d331.jpg');
 
 -- ----------------------------
 -- Table structure for face_information_health
 -- ----------------------------
 DROP TABLE IF EXISTS `face_information_health`;
 CREATE TABLE `face_information_health` (
-  `id` int(11) NOT NULL,
-  `hearing` varchar(255) DEFAULT NULL COMMENT '听力（1.良好，2.一般，3.很大声才能听见，4.听不见）',
-  `help_hear` varchar(255) DEFAULT NULL COMMENT '是否佩戴助听器（1.是，2.否）',
-  `health` varchar(255) DEFAULT NULL COMMENT '病史（1.健康   2.高血压   3.糖尿病   4.冠心病   5.恶性肿瘤   6.结核病   7.肝炎   8.脑卒中  9.精神疾病  10.慢性阻塞性肺疾病  11.慢性支气管炎  12.帕金森综合症  13.腰椎间盘突出  14.阿尔茨海默病  15.心脏病  16.肺气肿  17.白内障  18.脑血栓  19.风湿病  20.脑中风  21.高脂血症  22.哮喘  23.意外伤害  24.其他_____）',
-  `allergy` varchar(255) DEFAULT NULL COMMENT '药物过敏情况',
-  `allergy_history` varchar(255) DEFAULT NULL COMMENT '药物过敏史（1.是，2.否）',
-  `allergy_type` varchar(255) DEFAULT NULL COMMENT '过敏类型（□药物过敏  □化工金属  □植物过敏  □食物过敏  □动物过敏  □其他_____）',
-  `every_eat_drugs` varchar(255) DEFAULT NULL COMMENT '经常服用药物',
-  `blood_type` varchar(255) DEFAULT NULL COMMENT '血型',
-  `zi_li_type` varchar(255) DEFAULT NULL COMMENT '老人自理类别（□自理  □失能  □半失能  □失智  □轻度依赖  □重度依赖  □不能自理）',
-  `IMEI` varchar(255) DEFAULT NULL COMMENT '绑定设备',
-  `health_record` varchar(255) DEFAULT NULL COMMENT '健康记录',
-  `test_record` varchar(255) DEFAULT NULL COMMENT '体检记录',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hearing` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '听力（1.良好，2.一般，3.很大声才能听见，4.听不见）',
+  `help_hear` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '是否佩戴助听器（1.是，2.否）',
+  `health` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '病史（1.健康   2.高血压   3.糖尿病   4.冠心病   5.恶性肿瘤   6.结核病   7.肝炎   8.脑卒中  9.精神疾病  10.慢性阻塞性肺疾病  11.慢性支气管炎  12.帕金森综合症  13.腰椎间盘突出  14.阿尔茨海默病  15.心脏病  16.肺气肿  17.白内障  18.脑血栓  19.风湿病  20.脑中风  21.高脂血症  22.哮喘  23.意外伤害  24.其他_____）',
+  `allergy` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '药物过敏情况',
+  `allergy_history` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '药物过敏史（1.是，2.否）',
+  `allergy_type` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '过敏类型（1药物过敏  2化工金属  3植物过敏  4食物过敏  5动物过敏  6其他_____）',
+  `every_eat_drugs` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '经常服用药物',
+  `blood_type` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '血型',
+  `zi_li_type` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '老人自理类别（1自理  2失能  3半失能  4失智  5轻度依赖  6重度依赖  7不能自理）',
+  `IMEI` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '绑定设备',
+  `health_record` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '健康记录',
+  `test_record` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '体检记录',
+  `allergy_type_other_text` varchar(255) CHARACTER SET latin1 DEFAULT NULL COMMENT '过敏类型其他对应文本',
+  `health_other_text` varchar(255) DEFAULT NULL COMMENT '病史其他对应文本',
+  `parentId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='采集用户健康信息表';
 
 -- ----------------------------
 -- Records of face_information_health
@@ -196,7 +225,7 @@ CREATE TABLE `face_information_health` (
 -- ----------------------------
 DROP TABLE IF EXISTS `face_information_personal`;
 CREATE TABLE `face_information_personal` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullName` varchar(255) DEFAULT NULL COMMENT '姓名',
   `sex` int(11) DEFAULT NULL COMMENT '性别',
   `minZu` varchar(255) DEFAULT NULL COMMENT '民族',
@@ -220,18 +249,19 @@ CREATE TABLE `face_information_personal` (
   `updateDate` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='基本信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='采集人基本信息';
 
 -- ----------------------------
 -- Records of face_information_personal
 -- ----------------------------
+INSERT INTO `face_information_personal` VALUES ('1', '2', '2', '2', '2', '2', '2', '22', '2', '2', '2', '2', '2', '2', '2', '2', '2', '22', '2', '2', '2', '2019-04-29 16:20:10', '2');
 
 -- ----------------------------
 -- Table structure for face_information_service
 -- ----------------------------
 DROP TABLE IF EXISTS `face_information_service`;
 CREATE TABLE `face_information_service` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `service_type` varchar(255) DEFAULT NULL COMMENT '服务类型（1.信息服务，2.实体服务）',
   `state` varchar(255) DEFAULT NULL COMMENT '服务状态（）',
   `phone_meal` varchar(255) DEFAULT NULL COMMENT '用户手机套餐',
@@ -245,7 +275,7 @@ CREATE TABLE `face_information_service` (
   `update_date` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='服务信息表';
 
 -- ----------------------------
 -- Records of face_information_service
@@ -256,18 +286,22 @@ CREATE TABLE `face_information_service` (
 -- ----------------------------
 DROP TABLE IF EXISTS `face_living_condition`;
 CREATE TABLE `face_living_condition` (
-  `id` int(11) NOT NULL,
-  `live_state` varchar(255) DEFAULT NULL COMMENT '居住状态',
-  `need_hlep` varchar(255) DEFAULT NULL COMMENT '是否特困或者失能',
-  `first_hlep` varchar(255) DEFAULT NULL COMMENT '是否重点优抚',
-  `severe_disability` varchar(255) DEFAULT NULL COMMENT '是否重度残疾',
-  `three_no` varchar(255) DEFAULT NULL COMMENT '是否城市三无',
-  `five_insurance` varchar(255) DEFAULT NULL COMMENT '是否农村五保',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `live_state` varchar(255) DEFAULT NULL COMMENT '居住状态（1其他情况,2与子女居住,3与配偶居住,4独居）',
+  `need_hlep` varchar(255) DEFAULT NULL COMMENT '是否特困或者失能（1是，2否）',
+  `first_hlep` varchar(255) DEFAULT NULL COMMENT '是否重点优抚（1是，2否）',
+  `severe_disability` varchar(255) DEFAULT NULL COMMENT '是否重度残疾（1是，2否）',
+  `three_no` varchar(255) DEFAULT NULL COMMENT '是否城市三无（1是，2否）',
+  `five_insurance` varchar(255) DEFAULT NULL COMMENT '是否农村五保（1是，2否）',
   `create_date` varchar(255) DEFAULT NULL,
   `update_date` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
+  `parentId` int(11) DEFAULT NULL COMMENT 'InfomationPersonal_id',
+  `pestype` varchar(255) DEFAULT NULL COMMENT '人员类型（0特困失能 1重点优抚 2城市三五 3农村五保 4重度残疾 5其他）',
+  `pestypeothertext` varchar(255) DEFAULT NULL COMMENT '人员类别其他文本',
+  `liveStateOtherText` varchar(255) DEFAULT NULL COMMENT '居住情况其他文本',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='生活居住状况及社会关系';
 
 -- ----------------------------
 -- Records of face_living_condition
@@ -278,17 +312,20 @@ CREATE TABLE `face_living_condition` (
 -- ----------------------------
 DROP TABLE IF EXISTS `face_occupy_home`;
 CREATE TABLE `face_occupy_home` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `occupy_home_type` varchar(255) DEFAULT NULL COMMENT '老人类别(0特困老人  1低保老人  2建档立卡贫困老人优抚对象  3失独老人  4残疾老人 \r\n5计划生育特殊家庭成员  6其他 7空巢老人  8农村留守老人_)',
   `occupy_home_government_purchases` varchar(255) DEFAULT NULL COMMENT '政府购买对象(0 70岁以上享受城乡低保待遇  1 80岁以上重点优抚对象 2 80岁以上失独老人)',
   `occupy_home_up_standard1` varchar(255) DEFAULT NULL COMMENT '达到标准1(0介助   1介护)',
   `occupy_home_up_standard2` varchar(255) DEFAULT NULL COMMENT '达到标准2(0介助   1介护)',
-  `occupy_home_government to_buy` varchar(255) DEFAULT NULL COMMENT '是否为政府购买对象(0 是 1否)',
+  `occupy_home_government_to_buy` varchar(255) DEFAULT NULL COMMENT '是否为政府购买对象(0 是 1否)',
   `occupy_home_expect_pension` varchar(255) DEFAULT NULL COMMENT '期望养老模式(0居家养老      1社区养老      2机构养老      3其他)',
   `occupy_home_expect_server` varchar(255) DEFAULT NULL COMMENT '期望的服务(0家政服务 1生活照料 2健康咨询  3精神慰藉  4陪同就医  5换季服务 )',
   `createtime` varchar(255) DEFAULT NULL,
   `createuserid` varchar(255) DEFAULT NULL,
   `deptid` int(11) DEFAULT NULL,
+  `parentId` int(11) DEFAULT NULL,
+  `occupy_home_type_other_text` varchar(255) DEFAULT NULL COMMENT '老人类别其他对应文本',
+  `occupy_home_expect_pension_other_text` varchar(255) DEFAULT NULL COMMENT '期望养老模式其他类型对应文本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='居家养老信息表';
 
@@ -297,13 +334,10 @@ CREATE TABLE `face_occupy_home` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for face_second_visit_assessment
-_table
+-- Table structure for face_second_visit_assessment_table
 -- ----------------------------
-DROP TABLE IF EXISTS `face_second_visit_assessment
-_table`;
-CREATE TABLE `face_second_visit_assessment
-_table` (
+DROP TABLE IF EXISTS `face_second_visit_assessment_table`;
+CREATE TABLE `face_second_visit_assessment_table` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `secondvisit_name` varchar(255) DEFAULT NULL COMMENT '姓名',
   `secondvisit_sex` varchar(255) DEFAULT NULL COMMENT '性别(0男 1女)',
@@ -324,12 +358,14 @@ _table` (
   `createtime` varchar(255) DEFAULT NULL,
   `createuserid` int(11) DEFAULT NULL,
   `deptid` int(11) DEFAULT NULL,
+  `face_identify_top_id` int(11) DEFAULT NULL,
+  `secondvisit_medical_other_text` varchar(255) DEFAULT NULL COMMENT '医疗支付方式其他对应文本',
+  `secondvisit_expectations_pension_other_text` varchar(255) DEFAULT NULL COMMENT '期望的养老模式其他选择对应文本',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='第二次走访基础信息表';
 
 -- ----------------------------
--- Records of face_second_visit_assessment
-_table
+-- Records of face_second_visit_assessment_table
 -- ----------------------------
 
 -- ----------------------------
@@ -423,7 +459,7 @@ CREATE TABLE `sys_login_log` (
   `message` text COMMENT '具体消息',
   `ip` varchar(255) DEFAULT NULL COMMENT '登录ip',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1151 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录记录';
+) ENGINE=InnoDB AUTO_INCREMENT=1190 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录记录';
 
 -- ----------------------------
 -- Records of sys_login_log
@@ -1362,6 +1398,45 @@ INSERT INTO `sys_login_log` VALUES ('1147', '登录日志', '1', '2018-11-06 02:
 INSERT INTO `sys_login_log` VALUES ('1148', '登录失败日志', null, '2019-02-14 07:43:29', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
 INSERT INTO `sys_login_log` VALUES ('1149', '登录失败日志', null, '2019-02-14 07:43:37', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
 INSERT INTO `sys_login_log` VALUES ('1150', '登录日志', '1', '2019-02-14 07:43:43', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1151', '登录失败日志', null, '2019-02-18 01:45:57', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1152', '登录失败日志', null, '2019-02-18 01:46:04', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1153', '登录失败日志', null, '2019-02-18 01:46:09', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1154', '登录失败日志', null, '2019-02-18 01:46:22', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1155', '登录失败日志', null, '2019-02-18 01:46:28', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1156', '登录失败日志', null, '2019-02-18 01:46:40', '成功', '账号:admin,账号密码错误', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1157', '登录日志', '1', '2019-02-18 01:46:47', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1158', '登录日志', '1', '2019-02-18 01:57:16', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1159', '登录日志', '1', '2019-02-18 02:13:25', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1160', '登录日志', '1', '2019-02-18 02:28:42', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1161', '登录日志', '1', '2019-03-08 07:07:45', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1162', '退出日志', '1', '2019-03-08 07:17:58', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1163', '登录日志', '1', '2019-03-08 07:18:25', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1164', '登录日志', '1', '2019-04-29 07:03:44', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1165', '登录日志', '1', '2019-04-29 07:28:46', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1166', '登录日志', '1', '2019-04-29 07:46:52', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1167', '登录日志', '1', '2019-04-29 08:17:26', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1168', '登录日志', '1', '2019-04-29 08:24:16', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1169', '登录日志', '1', '2019-04-29 08:27:23', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1170', '登录日志', '1', '2019-04-29 08:34:22', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1171', '登录日志', '1', '2019-04-29 08:35:38', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1172', '登录日志', '1', '2019-04-29 08:38:17', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1173', '登录日志', '1', '2019-04-29 08:51:45', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1174', '登录日志', '1', '2019-04-29 09:11:47', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1175', '登录日志', '1', '2019-04-30 01:59:55', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1176', '登录日志', '1', '2019-04-30 02:13:53', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1177', '登录日志', '1', '2019-04-30 02:30:58', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1178', '登录日志', '1', '2019-04-30 04:58:41', '成功', null, '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_login_log` VALUES ('1179', '登录日志', '1', '2019-04-30 05:20:59', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1180', '登录日志', '1', '2019-04-30 06:05:55', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1181', '登录日志', '1', '2019-04-30 06:47:10', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1182', '登录日志', '1', '2019-04-30 07:38:31', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1183', '登录日志', '1', '2019-04-30 07:49:24', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1184', '登录日志', '1', '2019-04-30 07:51:48', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1185', '登录日志', '1', '2019-04-30 07:54:16', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1186', '登录日志', '1', '2019-04-30 07:56:14', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1187', '登录日志', '1', '2019-04-30 08:06:48', '成功', null, '127.0.0.1');
+INSERT INTO `sys_login_log` VALUES ('1188', '登录日志', '1', '2019-04-30 08:24:30', '成功', null, '171.88.55.194');
+INSERT INTO `sys_login_log` VALUES ('1189', '登录日志', '1', '2019-05-07 02:45:38', '成功', null, '171.88.54.110');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1382,7 +1457,7 @@ CREATE TABLE `sys_menu` (
   `status` int(65) DEFAULT NULL COMMENT '菜单状态 :  1:启用   0:不启用',
   `isopen` int(11) DEFAULT NULL COMMENT '是否打开:    1:打开   0:不打开',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1406,7 +1481,7 @@ INSERT INTO `sys_menu` VALUES ('120', 'menu_add', 'menu', '[0],[system],[menu],'
 INSERT INTO `sys_menu` VALUES ('121', 'menu_edit', 'menu', '[0],[system],[menu],', '修改菜单', null, '/menu/edit', '2', '3', '0', null, '1', '0');
 INSERT INTO `sys_menu` VALUES ('128', 'log', 'system', '[0],[system],', '业务日志', null, '/log', '6', '2', '1', null, '1', '0');
 INSERT INTO `sys_menu` VALUES ('130', 'druid', 'system', '[0],[system],', '监控管理', null, '/druid', '7', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('131', 'dept', 'system', '[0],[system],', '门店管理', '', '/dept', '3', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('131', 'dept', 'system', '[0],[system],', '部门管理', '', '/dept', '3', '2', '1', null, '1', null);
 INSERT INTO `sys_menu` VALUES ('132', 'dict', 'system', '[0],[system],', '字典管理', null, '/dict', '4', '2', '1', null, '1', null);
 INSERT INTO `sys_menu` VALUES ('133', 'loginLog', 'system', '[0],[system],', '登录日志', null, '/loginLog', '6', '2', '1', null, '1', null);
 INSERT INTO `sys_menu` VALUES ('134', 'log_clean', 'log', '[0],[system],[log],', '清空日志', null, '/log/delLog', '3', '3', '0', null, '1', null);
@@ -1467,6 +1542,11 @@ INSERT INTO `sys_menu` VALUES ('190', 'hycx_export', 'hygl_hycx', '[0],[hygl],[h
 INSERT INTO `sys_menu` VALUES ('192', 'hygl_hybq', 'hygl', '[0],[hygl],', '会员补签', '', '/memberRepair', '13', '2', '1', null, '1', null);
 INSERT INTO `sys_menu` VALUES ('193', '54421545', 'hdgl', '[0],[hdgl],', '活动领取查询', '', '/activity/activitygetpage', '3', '2', '1', null, '1', null);
 INSERT INTO `sys_menu` VALUES ('194', 'sjtj_hykk', 'sjtj', '[0],[sjtj],', '会员开卡统计', '', '/barranking/count', '4', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('195', '人脸识别', '0', '[0],', '人脸识别', '', '/', '5', '1', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('196', '人脸识别记录', '人脸识别', '[0],[人脸识别],', '人脸识别记录', '', '/', '1', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('197', '基础信息', 'sjtj', '[0],[sjtj],', '基础信息', '', '/informationPersonal', '10', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('198', '首次走访基础信息采集表', 'sjtj', '[0],[sjtj],', '首次走访基础信息采集表', '', '/user/first_table', '11', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES ('199', '第二次走访基础信息采集表', 'sjtj', '[0],[sjtj],', '第二次走访基础信息采集表', '', '/uset/second_info', '13', '2', '1', null, '1', null);
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1503,7 +1583,7 @@ CREATE TABLE `sys_operation_log` (
   `succeed` varchar(255) DEFAULT NULL COMMENT '是否成功',
   `message` text COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1748 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=1770 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of sys_operation_log
@@ -1576,6 +1656,28 @@ INSERT INTO `sys_operation_log` VALUES ('1744', '异常日志', '', '1', null, n
 INSERT INTO `sys_operation_log` VALUES ('1745', '异常日志', '', '1', null, null, '2018-11-05 07:53:14', '失败', 'java.lang.NullPointerException\n	at com.stylefeng.guns.modular.main.controller.ActivityController.activitygetpagelist2(ActivityController.java:363)\n	at com.stylefeng.guns.modular.main.controller.ActivityControllerTTFastClassBySpringCGLIBTT2d791315.invoke(<generated>)\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:747)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)\n	at com.stylefeng.guns.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\n	at sun.reflect.GeneratedMethodAccessor109.invoke(Unknown Source)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:633)\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)\n	at com.stylefeng.guns.modular.main.controller.ActivityControllerTTEnhancerBySpringCGLIBTTc0555cd3.activitygetpagelist2(<generated>)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\n');
 INSERT INTO `sys_operation_log` VALUES ('1746', '异常日志', '', '1', null, null, '2018-11-05 07:53:14', '失败', 'java.lang.NullPointerException\n	at com.stylefeng.guns.modular.main.controller.ActivityController.activitygetpagelist(ActivityController.java:319)\n	at com.stylefeng.guns.modular.main.controller.ActivityControllerTTFastClassBySpringCGLIBTT2d791315.invoke(<generated>)\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:747)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)\n	at com.stylefeng.guns.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\n	at sun.reflect.GeneratedMethodAccessor109.invoke(Unknown Source)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:633)\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)\n	at com.stylefeng.guns.modular.main.controller.ActivityControllerTTEnhancerBySpringCGLIBTTc0555cd3.activitygetpagelist(<generated>)\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n	at java.lang.reflect.Method.invoke(Method.java:498)\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\n');
 INSERT INTO `sys_operation_log` VALUES ('1747', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-02-14 07:43:55', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,门店管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,接口文档,会员管理,会员签到,会员查询,Excel导出,新增会员,会员配置,添加,修改,删除,会员积分查询,新增会员积分,会员积分兑换,签到场次查询,会员卡挂失,积分清零,积分赠送,会员补签,活动管理,新增活动,活动查询,活动领取查询,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计');
+INSERT INTO `sys_operation_log` VALUES ('1748', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-02-18 02:08:13', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,门店管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,代码生成,接口文档,会员管理,会员签到,会员查询,Excel导出,新增会员,会员配置,添加,修改,删除,会员积分查询,新增会员积分,会员积分兑换,签到场次查询,会员卡挂失,积分清零,积分赠送,会员补签,活动管理,新增活动,活动查询,活动领取查询,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计');
+INSERT INTO `sys_operation_log` VALUES ('1749', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-03-08 07:08:24', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,门店管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,代码生成,接口文档,会员管理,会员签到,会员查询,Excel导出,新增会员,会员配置,添加,修改,删除,会员积分查询,新增会员积分,会员积分兑换,签到场次查询,会员卡挂失,积分清零,积分赠送,会员补签,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计');
+INSERT INTO `sys_operation_log` VALUES ('1750', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-03-08 07:08:52', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,门店管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,代码生成,接口文档,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计');
+INSERT INTO `sys_operation_log` VALUES ('1751', '业务日志', '菜单新增', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'add', '2019-03-08 07:09:50', '成功', '菜单名称=人脸识别');
+INSERT INTO `sys_operation_log` VALUES ('1752', '业务日志', '菜单新增', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'add', '2019-03-08 07:10:32', '成功', '菜单名称=人脸识别记录');
+INSERT INTO `sys_operation_log` VALUES ('1753', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-03-08 07:10:46', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,门店管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,代码生成,接口文档,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计,人脸识别,人脸识别记录');
+INSERT INTO `sys_operation_log` VALUES ('1754', '业务日志', '修改菜单', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'edit', '2019-03-08 07:11:34', '成功', '菜单名称=人脸识别;;;字段名称:菜单排序号,旧值:1,新值:5');
+INSERT INTO `sys_operation_log` VALUES ('1755', '业务日志', '修改菜单', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'edit', '2019-03-08 07:14:57', '成功', '菜单名称=部门管理;;;字段名称:菜单名称,旧值:门店管理,新值:部门管理');
+INSERT INTO `sys_operation_log` VALUES ('1756', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-03-08 07:16:47', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,接口文档,数据统计,签到数据报表,积分排名统计表,会员分布统计表,会员开卡统计,人脸识别,人脸识别记录');
+INSERT INTO `sys_operation_log` VALUES ('1757', '业务日志', '菜单新增', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'add', '2019-04-29 07:17:06', '成功', '菜单名称=基础信息');
+INSERT INTO `sys_operation_log` VALUES ('1758', '业务日志', '菜单新增', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'add', '2019-04-29 07:20:11', '成功', '菜单名称=首次走访基础信息采集表');
+INSERT INTO `sys_operation_log` VALUES ('1759', '业务日志', '菜单新增', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'add', '2019-04-29 07:20:59', '成功', '菜单名称=第二次走访基础信息采集表');
+INSERT INTO `sys_operation_log` VALUES ('1760', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-04-29 07:21:12', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,接口文档,数据统计,会员分布统计表,基础信息,首次走访基础信息采集表,第二次走访基础信息采集表,人脸识别,人脸识别记录');
+INSERT INTO `sys_operation_log` VALUES ('1761', '业务日志', '配置权限', '1', 'com.stylefeng.guns.modular.system.controller.RoleController', 'setAuthority', '2019-04-29 07:22:05', '成功', '角色名称=超级管理员,资源名称=系统管理,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,菜单管理,添加菜单,修改菜单,菜单编辑跳转,菜单列表,业务日志,清空日志,日志列表,日志详情,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,登录日志,清空登录日志,登录日志列表,通知管理,添加通知,修改通知,删除通知,通知,代码生成,接口文档,数据统计,会员分布统计表,基础信息,首次走访基础信息采集表,第二次走访基础信息采集表,人脸识别,人脸识别记录');
+INSERT INTO `sys_operation_log` VALUES ('1762', '业务日志', '修改菜单', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'edit', '2019-04-29 07:29:09', '成功', '菜单名称=基础信息;;;字段名称:url地址,旧值:/user/info,新值:/firstVisitAssessmentTable');
+INSERT INTO `sys_operation_log` VALUES ('1763', '异常日志', '', '1', null, null, '2019-04-29 07:29:14', '失败', 'org.springframework.jdbc.BadSqlGrammarException: \r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column \'deptId\' in \'where clause\'\r\n### The error may exist in com/stylefeng/guns/modular/system/dao/FirstVisitAssessmentTableMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id AS id,firstvisit_community_1 AS firstvisitCommunity1,firstvisit_community_2 AS firstvisitCommunity2,firstvisit_community_3 AS firstvisitCommunity3,firstvisit_name AS firstvisitName,firstvisit_sex AS firstvisitSex,firstvisit_level_education AS firstvisitLevelEducation,firstvisit_idcard AS firstvisitIdcard,firstvisit_othercard AS firstvisitOthercard,firstvisit_phone AS firstvisitPhone,firstvisit_residential_address AS firstvisitResidentialAddress,firstvisit_residential_time AS firstvisitResidentialTime,firstvisit_emergency_contact AS firstvisitEmergencyContact,firstvisit_professional AS firstvisitProfessional,firstvisit_category AS firstvisitCategory,firstvisit_economic_sources AS firstvisitEconomicSources,firstvisit_marital AS firstvisitMarital,firstvisit_children AS firstvisitChildren,firstvisit_medical_category AS firstvisitMedicalCategory,firstvisit_living AS firstvisitLiving,firstvisit_living_house AS firstvisitLivingHouse,firstvisit_living_elevator AS firstvisitLivingElevator,firstvisit_living_layer AS firstvisitLivingLayer,firstvisit_living_toilet AS firstvisitLivingToilet,firstvisit_living_bathing_facilities AS firstvisitLivingBathingFacilities,firstvisit_original_care_situation AS firstvisitOriginalcareSituation,firstvisit_service AS firstvisitService,firstvisit_physical_condition_radio AS firstvisitPhysicalConditionRadio,firstvisit_physical_condition_checkbox AS firstvisitPhysicalConditionCheckbox,firstvisit_psychological AS firstvisitPsychological,firstvisit_social_activities AS firstvisitSocialActivities,firstvisit_social_activities_type AS firstvisitSocialActivitiesType  FROM face_first_visit_assessment_table   WHERE  (deptId = ?)\r\n### Cause: java.sql.SQLSyntaxErrorException: Unknown column \'deptId\' in \'where clause\'\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column \'deptId\' in \'where clause\'\r\n	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:234)\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)\r\n	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)\r\n	at com.sun.proxy.TProxy99.selectList(Unknown Source)\r\n	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:238)\r\n	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:137)\r\n	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:76)\r\n	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)\r\n	at com.sun.proxy.TProxy115.selectPage(Unknown Source)\r\n	at com.baomidou.mybatisplus.service.impl.ServiceImpl.selectPage(ServiceImpl.java:422)\r\n	at com.baomidou.mybatisplus.service.impl.ServiceImplTTFastClassBySpringCGLIBTT3e2398a4.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:747)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)\r\n	at com.stylefeng.guns.modular.face.service.impl.FirstVisitAssessmentTableServiceImplTTEnhancerBySpringCGLIBTT3be5b241.selectPage(<generated>)\r\n	at com.stylefeng.guns.modular.face.controller.FirstVisitAssessmentTableController.list(FirstVisitAssessmentTableController.java:68)\r\n	at com.stylefeng.guns.modular.face.controller.FirstVisitAssessmentTableControllerTTFastClassBySpringCGLIBTTe1ff7fbf.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:747)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)\r\n	at com.stylefeng.guns.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:633)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)\r\n	at com.stylefeng.guns.modular.face.controller.FirstVisitAssessmentTableControllerTTEnhancerBySpringCGLIBTTfd5cdd6d.list(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\nCaused by: java.sql.SQLSyntaxErrorException: Unknown column \'deptId\' in \'where clause\'\r\n	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)\r\n	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)\r\n	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)\r\n	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:960)\r\n	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:388)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3409)\r\n	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3407)\r\n	at com.alibaba.druid.wall.WallFilter.preparedStatement_execute(WallFilter.java:619)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3407)\r\n	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)\r\n	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498)\r\n	at sun.reflect.GeneratedMethodAccessor114.invoke(Unknown Source)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)\r\n	at com.sun.proxy.TProxy138.execute(Unknown Source)\r\n	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63)\r\n	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)\r\n	at sun.reflect.GeneratedMethodAccessor100.invoke(Unknown Source)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy136.query(Unknown Source)\r\n	at sun.reflect.GeneratedMethodAccessor100.invoke(Unknown Source)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy136.query(Unknown Source)\r\n	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63)\r\n	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326)\r\n	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)\r\n	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109)\r\n	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83)\r\n	at sun.reflect.GeneratedMethodAccessor122.invoke(Unknown Source)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy135.query(Unknown Source)\r\n	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)\r\n	... 108 more\r\n');
+INSERT INTO `sys_operation_log` VALUES ('1764', '业务日志', '修改菜单', '1', 'com.stylefeng.guns.modular.system.controller.MenuController', 'edit', '2019-04-29 07:42:23', '成功', '菜单名称=基础信息;;;字段名称:url地址,旧值:/firstVisitAssessmentTable,新值:/informationPersonal');
+INSERT INTO `sys_operation_log` VALUES ('1765', '业务日志', '修改管理员', '1', 'com.stylefeng.guns.modular.system.controller.UserMgrController', 'edit', '2019-04-30 08:25:54', '成功', '账号=admin;;;');
+INSERT INTO `sys_operation_log` VALUES ('1766', '异常日志', '', '1', null, null, '2019-04-30 08:27:09', '失败', 'org.springframework.web.multipart.MultipartException: Failed to parse multipart servlet request; nested exception is java.io.IOException: org.apache.tomcat.util.http.fileupload.FileUploadException: the request was rejected because no multipart boundary was found\n	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.handleParseFailure(StandardMultipartHttpServletRequest.java:122)\n	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:113)\n	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:86)\n	at org.springframework.web.multipart.support.StandardServletMultipartResolver.resolveMultipart(StandardServletMultipartResolver.java:93)\n	at org.springframework.web.servlet.DispatcherServlet.checkMultipart(DispatcherServlet.java:1128)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:960)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\nCaused by: java.io.IOException: org.apache.tomcat.util.http.fileupload.FileUploadException: the request was rejected because no multipart boundary was found\n	at org.apache.catalina.connector.Request.parseParts(Request.java:2916)\n	at org.apache.catalina.connector.Request.parseParameters(Request.java:3216)\n	at org.apache.catalina.connector.Request.getParameter(Request.java:1137)\n	at org.apache.catalina.connector.RequestFacade.getParameter(RequestFacade.java:381)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:75)\n	... 23 more\nCaused by: org.apache.tomcat.util.http.fileupload.FileUploadException: the request was rejected because no multipart boundary was found\n	at org.apache.tomcat.util.http.fileupload.FileUploadBaseTFileItemIteratorImpl.<init>(FileUploadBase.java:831)\n	at org.apache.tomcat.util.http.fileupload.FileUploadBase.getItemIterator(FileUploadBase.java:256)\n	at org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:280)\n	at org.apache.catalina.connector.Request.parseParts(Request.java:2868)\n	... 27 more\n');
+INSERT INTO `sys_operation_log` VALUES ('1767', '异常日志', '', '1', null, null, '2019-05-07 02:45:46', '失败', 'org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type \'java.lang.String\' to required type \'java.lang.Integer\'; nested exception is java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:131)\n	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:124)\n	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:161)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:131)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:83)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\nCaused by: java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)\n	at java.lang.Integer.parseInt(Integer.java:580)\n	at java.lang.Integer.valueOf(Integer.java:766)\n	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:210)\n	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)\n	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:466)\n	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:439)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:192)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:99)\n	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:73)\n	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:52)\n	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:692)\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123)\n	... 71 more\n');
+INSERT INTO `sys_operation_log` VALUES ('1768', '异常日志', '', '1', null, null, '2019-05-07 02:45:47', '失败', 'org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type \'java.lang.String\' to required type \'java.lang.Integer\'; nested exception is java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:131)\n	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:124)\n	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:161)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:131)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:83)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\nCaused by: java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)\n	at java.lang.Integer.parseInt(Integer.java:580)\n	at java.lang.Integer.valueOf(Integer.java:766)\n	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:210)\n	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)\n	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:466)\n	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:439)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:192)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:99)\n	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:73)\n	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:52)\n	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:692)\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123)\n	... 71 more\n');
+INSERT INTO `sys_operation_log` VALUES ('1769', '异常日志', '', '1', null, null, '2019-05-07 02:46:05', '失败', 'org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type \'java.lang.String\' to required type \'java.lang.Integer\'; nested exception is java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:131)\n	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:124)\n	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:161)\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:131)\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)\n	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.stylefeng.guns.core.xss.XssFilter.doFilter(XssFilter.java:31)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:83)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496)\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:790)\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\n	at java.lang.Thread.run(Thread.java:748)\nCaused by: java.lang.NumberFormatException: For input string: \"95820286.jpg\"\n	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)\n	at java.lang.Integer.parseInt(Integer.java:580)\n	at java.lang.Integer.valueOf(Integer.java:766)\n	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:210)\n	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)\n	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:466)\n	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:439)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:192)\n	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:99)\n	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:73)\n	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:52)\n	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:692)\n	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123)\n	... 71 more\n');
 
 -- ----------------------------
 -- Table structure for sys_prov_city_dist
@@ -5117,7 +5219,7 @@ CREATE TABLE `sys_relation` (
   `menuid` bigint(11) DEFAULT NULL COMMENT '菜单id',
   `roleid` int(11) DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6146 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色和菜单关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=6603 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色和菜单关联表';
 
 -- ----------------------------
 -- Records of sys_relation
@@ -5165,85 +5267,67 @@ INSERT INTO `sys_relation` VALUES ('6063', '170', '13');
 INSERT INTO `sys_relation` VALUES ('6064', '187', '13');
 INSERT INTO `sys_relation` VALUES ('6065', '189', '13');
 INSERT INTO `sys_relation` VALUES ('6066', '194', '13');
-INSERT INTO `sys_relation` VALUES ('6067', '105', '1');
-INSERT INTO `sys_relation` VALUES ('6068', '106', '1');
-INSERT INTO `sys_relation` VALUES ('6069', '107', '1');
-INSERT INTO `sys_relation` VALUES ('6070', '108', '1');
-INSERT INTO `sys_relation` VALUES ('6071', '109', '1');
-INSERT INTO `sys_relation` VALUES ('6072', '110', '1');
-INSERT INTO `sys_relation` VALUES ('6073', '111', '1');
-INSERT INTO `sys_relation` VALUES ('6074', '112', '1');
-INSERT INTO `sys_relation` VALUES ('6075', '113', '1');
-INSERT INTO `sys_relation` VALUES ('6076', '165', '1');
-INSERT INTO `sys_relation` VALUES ('6077', '166', '1');
-INSERT INTO `sys_relation` VALUES ('6078', '167', '1');
-INSERT INTO `sys_relation` VALUES ('6079', '114', '1');
-INSERT INTO `sys_relation` VALUES ('6080', '115', '1');
-INSERT INTO `sys_relation` VALUES ('6081', '116', '1');
-INSERT INTO `sys_relation` VALUES ('6082', '117', '1');
-INSERT INTO `sys_relation` VALUES ('6083', '118', '1');
-INSERT INTO `sys_relation` VALUES ('6084', '162', '1');
-INSERT INTO `sys_relation` VALUES ('6085', '163', '1');
-INSERT INTO `sys_relation` VALUES ('6086', '164', '1');
-INSERT INTO `sys_relation` VALUES ('6087', '119', '1');
-INSERT INTO `sys_relation` VALUES ('6088', '120', '1');
-INSERT INTO `sys_relation` VALUES ('6089', '121', '1');
-INSERT INTO `sys_relation` VALUES ('6090', '150', '1');
-INSERT INTO `sys_relation` VALUES ('6091', '151', '1');
-INSERT INTO `sys_relation` VALUES ('6092', '128', '1');
-INSERT INTO `sys_relation` VALUES ('6093', '134', '1');
-INSERT INTO `sys_relation` VALUES ('6094', '158', '1');
-INSERT INTO `sys_relation` VALUES ('6095', '159', '1');
-INSERT INTO `sys_relation` VALUES ('6096', '130', '1');
-INSERT INTO `sys_relation` VALUES ('6097', '131', '1');
-INSERT INTO `sys_relation` VALUES ('6098', '135', '1');
-INSERT INTO `sys_relation` VALUES ('6099', '136', '1');
-INSERT INTO `sys_relation` VALUES ('6100', '137', '1');
-INSERT INTO `sys_relation` VALUES ('6101', '152', '1');
-INSERT INTO `sys_relation` VALUES ('6102', '153', '1');
-INSERT INTO `sys_relation` VALUES ('6103', '154', '1');
-INSERT INTO `sys_relation` VALUES ('6104', '132', '1');
-INSERT INTO `sys_relation` VALUES ('6105', '138', '1');
-INSERT INTO `sys_relation` VALUES ('6106', '139', '1');
-INSERT INTO `sys_relation` VALUES ('6107', '140', '1');
-INSERT INTO `sys_relation` VALUES ('6108', '155', '1');
-INSERT INTO `sys_relation` VALUES ('6109', '156', '1');
-INSERT INTO `sys_relation` VALUES ('6110', '157', '1');
-INSERT INTO `sys_relation` VALUES ('6111', '133', '1');
-INSERT INTO `sys_relation` VALUES ('6112', '160', '1');
-INSERT INTO `sys_relation` VALUES ('6113', '161', '1');
-INSERT INTO `sys_relation` VALUES ('6114', '141', '1');
-INSERT INTO `sys_relation` VALUES ('6115', '142', '1');
-INSERT INTO `sys_relation` VALUES ('6116', '143', '1');
-INSERT INTO `sys_relation` VALUES ('6117', '144', '1');
-INSERT INTO `sys_relation` VALUES ('6118', '145', '1');
-INSERT INTO `sys_relation` VALUES ('6119', '149', '1');
-INSERT INTO `sys_relation` VALUES ('6120', '168', '1');
-INSERT INTO `sys_relation` VALUES ('6121', '171', '1');
-INSERT INTO `sys_relation` VALUES ('6122', '172', '1');
-INSERT INTO `sys_relation` VALUES ('6123', '190', '1');
-INSERT INTO `sys_relation` VALUES ('6124', '173', '1');
-INSERT INTO `sys_relation` VALUES ('6125', '174', '1');
-INSERT INTO `sys_relation` VALUES ('6126', '184', '1');
-INSERT INTO `sys_relation` VALUES ('6127', '185', '1');
-INSERT INTO `sys_relation` VALUES ('6128', '186', '1');
-INSERT INTO `sys_relation` VALUES ('6129', '175', '1');
-INSERT INTO `sys_relation` VALUES ('6130', '176', '1');
-INSERT INTO `sys_relation` VALUES ('6131', '177', '1');
-INSERT INTO `sys_relation` VALUES ('6132', '178', '1');
-INSERT INTO `sys_relation` VALUES ('6133', '179', '1');
-INSERT INTO `sys_relation` VALUES ('6134', '180', '1');
-INSERT INTO `sys_relation` VALUES ('6135', '181', '1');
-INSERT INTO `sys_relation` VALUES ('6136', '192', '1');
-INSERT INTO `sys_relation` VALUES ('6137', '169', '1');
-INSERT INTO `sys_relation` VALUES ('6138', '182', '1');
-INSERT INTO `sys_relation` VALUES ('6139', '183', '1');
-INSERT INTO `sys_relation` VALUES ('6140', '193', '1');
-INSERT INTO `sys_relation` VALUES ('6141', '170', '1');
-INSERT INTO `sys_relation` VALUES ('6142', '187', '1');
-INSERT INTO `sys_relation` VALUES ('6143', '188', '1');
-INSERT INTO `sys_relation` VALUES ('6144', '189', '1');
-INSERT INTO `sys_relation` VALUES ('6145', '194', '1');
+INSERT INTO `sys_relation` VALUES ('6542', '105', '1');
+INSERT INTO `sys_relation` VALUES ('6543', '106', '1');
+INSERT INTO `sys_relation` VALUES ('6544', '107', '1');
+INSERT INTO `sys_relation` VALUES ('6545', '108', '1');
+INSERT INTO `sys_relation` VALUES ('6546', '109', '1');
+INSERT INTO `sys_relation` VALUES ('6547', '110', '1');
+INSERT INTO `sys_relation` VALUES ('6548', '111', '1');
+INSERT INTO `sys_relation` VALUES ('6549', '112', '1');
+INSERT INTO `sys_relation` VALUES ('6550', '113', '1');
+INSERT INTO `sys_relation` VALUES ('6551', '165', '1');
+INSERT INTO `sys_relation` VALUES ('6552', '166', '1');
+INSERT INTO `sys_relation` VALUES ('6553', '167', '1');
+INSERT INTO `sys_relation` VALUES ('6554', '114', '1');
+INSERT INTO `sys_relation` VALUES ('6555', '115', '1');
+INSERT INTO `sys_relation` VALUES ('6556', '116', '1');
+INSERT INTO `sys_relation` VALUES ('6557', '117', '1');
+INSERT INTO `sys_relation` VALUES ('6558', '118', '1');
+INSERT INTO `sys_relation` VALUES ('6559', '162', '1');
+INSERT INTO `sys_relation` VALUES ('6560', '163', '1');
+INSERT INTO `sys_relation` VALUES ('6561', '164', '1');
+INSERT INTO `sys_relation` VALUES ('6562', '119', '1');
+INSERT INTO `sys_relation` VALUES ('6563', '120', '1');
+INSERT INTO `sys_relation` VALUES ('6564', '121', '1');
+INSERT INTO `sys_relation` VALUES ('6565', '150', '1');
+INSERT INTO `sys_relation` VALUES ('6566', '151', '1');
+INSERT INTO `sys_relation` VALUES ('6567', '128', '1');
+INSERT INTO `sys_relation` VALUES ('6568', '134', '1');
+INSERT INTO `sys_relation` VALUES ('6569', '158', '1');
+INSERT INTO `sys_relation` VALUES ('6570', '159', '1');
+INSERT INTO `sys_relation` VALUES ('6571', '130', '1');
+INSERT INTO `sys_relation` VALUES ('6572', '131', '1');
+INSERT INTO `sys_relation` VALUES ('6573', '135', '1');
+INSERT INTO `sys_relation` VALUES ('6574', '136', '1');
+INSERT INTO `sys_relation` VALUES ('6575', '137', '1');
+INSERT INTO `sys_relation` VALUES ('6576', '152', '1');
+INSERT INTO `sys_relation` VALUES ('6577', '153', '1');
+INSERT INTO `sys_relation` VALUES ('6578', '154', '1');
+INSERT INTO `sys_relation` VALUES ('6579', '132', '1');
+INSERT INTO `sys_relation` VALUES ('6580', '138', '1');
+INSERT INTO `sys_relation` VALUES ('6581', '139', '1');
+INSERT INTO `sys_relation` VALUES ('6582', '140', '1');
+INSERT INTO `sys_relation` VALUES ('6583', '155', '1');
+INSERT INTO `sys_relation` VALUES ('6584', '156', '1');
+INSERT INTO `sys_relation` VALUES ('6585', '157', '1');
+INSERT INTO `sys_relation` VALUES ('6586', '133', '1');
+INSERT INTO `sys_relation` VALUES ('6587', '160', '1');
+INSERT INTO `sys_relation` VALUES ('6588', '161', '1');
+INSERT INTO `sys_relation` VALUES ('6589', '141', '1');
+INSERT INTO `sys_relation` VALUES ('6590', '142', '1');
+INSERT INTO `sys_relation` VALUES ('6591', '143', '1');
+INSERT INTO `sys_relation` VALUES ('6592', '144', '1');
+INSERT INTO `sys_relation` VALUES ('6593', '145', '1');
+INSERT INTO `sys_relation` VALUES ('6594', '148', '1');
+INSERT INTO `sys_relation` VALUES ('6595', '149', '1');
+INSERT INTO `sys_relation` VALUES ('6596', '170', '1');
+INSERT INTO `sys_relation` VALUES ('6597', '189', '1');
+INSERT INTO `sys_relation` VALUES ('6598', '197', '1');
+INSERT INTO `sys_relation` VALUES ('6599', '198', '1');
+INSERT INTO `sys_relation` VALUES ('6600', '199', '1');
+INSERT INTO `sys_relation` VALUES ('6601', '195', '1');
+INSERT INTO `sys_relation` VALUES ('6602', '196', '1');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -5293,7 +5377,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '573803de-77cd-4310-917e-e145925036bf.jpg', 'admin', 'ecfadcde9305f8891bcfe5a1e28c253e', '8pgby', '张三', '2017-05-04 16:00:00', '2', 'sn93@qq.com', '18200000000', '1', '24', '1', '2016-01-29 08:49:53', '25');
+INSERT INTO `sys_user` VALUES ('1', '111e33cd-59c4-422e-a55b-6619d3b4a804.jpg', 'admin', 'ecfadcde9305f8891bcfe5a1e28c253e', '8pgby', '张三', '2017-05-04 16:00:00', '2', 'sn93@qq.com', '18200000000', '1', '0', '1', '2016-01-29 08:49:53', '25');
 INSERT INTO `sys_user` VALUES ('44', null, 'test', '45abb7879f6a8268f1ef600e6038ac73', 'ssts3', 'test', '2017-05-01 00:00:00', '1', 'abc@123.com', '', '5', '26', '3', '2017-05-16 20:33:37', null);
 INSERT INTO `sys_user` VALUES ('45', null, 'boss', '71887a5ad666a18f709e1d4e693d5a35', '1f7bf', '老板', '2017-12-04 00:00:00', '1', '', '', '1', '24', '3', '2017-12-04 22:24:02', null);
 INSERT INTO `sys_user` VALUES ('46', null, 'manager', 'b53cac62e7175637d4beb3b16b2f7915', 'j3cs9', '经理', '2017-12-04 00:00:00', '1', '', '', '1', '24', '3', '2017-12-04 22:24:24', null);

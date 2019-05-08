@@ -34,12 +34,15 @@ public class ApiLivingConditionController extends BaseController {
     @ApiOperation("新增采集人生活居住状况及社会关系")
     @ApiImplicitParams({
             @ApiImplicitParam(required = true, name = "liveState", value = "居住状态(1其他情况,2与子女居住,3与配偶居住,4独居)", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "needHlep", value = "是否特困或者失能（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "firstHlep", value = "是否重点优抚（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "severeDisability", value = "是否重度残疾（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "threeNo", value = "是否城市三无（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "fiveInsurance", value = "是否农村五保（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "needHlep", value = "是否特困或者失能（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "firstHlep", value = "是否重点优抚（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "severeDisability", value = "是否重度残疾（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "threeNo", value = "是否城市三无（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "fiveInsurance", value = "是否农村五保（1是，2否）", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "pestype", value = "人员类型（0特困失能 1重点优抚 2城市三五 3农村五保 4重度残疾 5其他）", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "pestypeothertext", value = "人员类别其他文本", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "liveStateOtherText", value = "居住情况其他文本", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<LivingCondition> add(LivingCondition livingCondition, int parentId) throws Exception {
         ResponseData<LivingCondition> informationPersonalResponseData = new ResponseData<>();
@@ -55,12 +58,15 @@ public class ApiLivingConditionController extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(required = true, name = "id", value = "LivingCondition_id", paramType = "query"),
             @ApiImplicitParam(required = true, name = "liveState", value = "居住状态(1其他情况,2与子女居住,3与配偶居住,4独居)", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "needHlep", value = "是否特困或者失能（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "firstHlep", value = "是否重点优抚（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "severeDisability", value = "是否重度残疾（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "threeNo", value = "是否城市三无（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "fiveInsurance", value = "是否农村五保（1是，2否）", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "needHlep", value = "是否特困或者失能（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "firstHlep", value = "是否重点优抚（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "severeDisability", value = "是否重度残疾（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "threeNo", value = "是否城市三无（1是，2否）", paramType = "query"),
+//            @ApiImplicitParam(required = true, name = "fiveInsurance", value = "是否农村五保（1是，2否）", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "pestype", value = "人员类型（0特困失能 1重点优抚 2城市三五 3农村五保 4重度残疾 5其他）", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "pestypeothertext", value = "人员类别其他文本", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "liveStateOtherText", value = "居住情况其他文本", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<LivingCondition> edit(LivingCondition livingCondition, int parentId) throws Exception {
         ResponseData<LivingCondition> informationPersonalResponseData = new ResponseData<>();
@@ -72,7 +78,7 @@ public class ApiLivingConditionController extends BaseController {
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人生活居住状况及社会关系")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<LivingCondition> getData(Integer parentId) throws Exception {
         ResponseData<LivingCondition> informationPersonalResponseData = new ResponseData<>();

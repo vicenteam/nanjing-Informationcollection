@@ -109,7 +109,7 @@ public class InformationHealth extends Model<InformationHealth> {
     @ApiModelProperty("病史其他对应文本")
     @TableField("health_other_text")
     private String healthOtherText;
-    @ApiModelProperty("主表id")
+    @ApiModelProperty("人脸识别&注册返回的 id (FaceIdentifyTop_id)")
     private Integer parentId;
 
     public Integer getParentId() {

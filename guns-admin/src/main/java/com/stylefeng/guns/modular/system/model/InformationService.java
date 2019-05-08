@@ -77,7 +77,7 @@ public class InformationService extends Model<InformationService> {
      * 主表id
      */
     @TableField("parent_id")
-    @ApiModelProperty("主表InformationPersonal id")
+    @ApiModelProperty("人脸识别&注册返回的 id (FaceIdentifyTop_id)")
     private Integer parentId;
     @TableField("create_date")
     @ApiModelProperty(hidden = true)

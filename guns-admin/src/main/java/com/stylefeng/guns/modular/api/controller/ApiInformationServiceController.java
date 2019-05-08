@@ -41,7 +41,7 @@ public class ApiInformationServiceController extends BaseController {
             @ApiImplicitParam(required = true, name = "govNum", value = "政府援助次数", paramType = "query"),
             @ApiImplicitParam(required = true, name = "changeStatus", value = "状态变更原因", paramType = "query"),
             @ApiImplicitParam(required = true, name = "refuse", value = "审核拒绝原因", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationService> add(InformationService informationService, int parentId) throws Exception {
         ResponseData<InformationService> informationPersonalResponseData = new ResponseData<>();
@@ -64,7 +64,7 @@ public class ApiInformationServiceController extends BaseController {
             @ApiImplicitParam(required = true, name = "govNum", value = "政府援助次数", paramType = "query"),
             @ApiImplicitParam(required = true, name = "changeStatus", value = "状态变更原因", paramType = "query"),
             @ApiImplicitParam(required = true, name = "refuse", value = "审核拒绝原因", paramType = "query"),
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query"),
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationService> edit(InformationService informationService, int parentId) throws Exception {
         ResponseData<InformationService> informationPersonalResponseData = new ResponseData<>();
@@ -76,12 +76,12 @@ public class ApiInformationServiceController extends BaseController {
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人服务信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(required = true, name = "parentId", value = "InfomationPersonal_id", paramType = "query")
+            @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
     public ResponseData<InformationService> getData(Integer parentId) throws Exception {
         ResponseData<InformationService> informationPersonalResponseData = new ResponseData<>();
         EntityWrapper<InformationService> informationPersonalEntityWrapper = new EntityWrapper<>();
-        informationPersonalEntityWrapper.eq("parentId",parentId);
+        informationPersonalEntityWrapper.eq("parent_Id",parentId);
         informationPersonalResponseData.setDataCollection(iInformationServiceService.selectOne(informationPersonalEntityWrapper));
         return informationPersonalResponseData;
     }

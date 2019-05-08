@@ -30,40 +30,45 @@ public class LivingCondition extends Model<LivingCondition> {
     /**
      * 居住状态
      */
-    @ApiModelProperty("居住状态")
+    @ApiModelProperty("居住状态（1其他情况,2与子女居住,3与配偶居住,4独居）")
     @TableField("live_state")
     private String liveState;
     /**
      * 是否特困或者失能
      */
     @TableField("need_hlep")
-    @ApiModelProperty("是否特困或者失能")
+//    @ApiModelProperty("是否特困或者失能")
+    @ApiModelProperty(hidden = true)
     private String needHlep;
     /**
      * 是否重点优抚
      */
     @TableField("first_hlep")
-    @ApiModelProperty("是否重点优抚")
+//    @ApiModelProperty("是否重点优抚")
+    @ApiModelProperty(hidden = true)
     private String firstHlep;
     /**
      * 是否重度残疾
      */
     @TableField("severe_disability")
-    @ApiModelProperty("是否重度残疾")
+//    @ApiModelProperty("是否重度残疾")
+    @ApiModelProperty(hidden = true)
     private String severeDisability;
     /**
      * 是否城市三无
      */
     @TableField("three_no")
-    @ApiModelProperty("是否城市三无")
+//    @ApiModelProperty("是否城市三无（0是，1否）")
+    @ApiModelProperty(hidden = true)
     private String threeNo;
     /**
      * 是否农村五保
      */
     @TableField("five_insurance")
-    @ApiModelProperty("")
+//    @ApiModelProperty("是否农村五保(0是，1否)")
+    @ApiModelProperty(hidden = true)
     private String fiveInsurance;
-    @ApiModelProperty("是否农村五保")
+    @ApiModelProperty("人脸识别&注册返回的 id (FaceIdentifyTop_id)")
     private Integer parentId;
 
     @TableField("create_date")
@@ -74,7 +79,37 @@ public class LivingCondition extends Model<LivingCondition> {
     private String updateDate;
     @ApiModelProperty(hidden = true)
     private Integer status;
+    @ApiModelProperty("人员类型（0特困失能 1重点优抚 2城市三五 3农村五保 4重度残疾 5其他）")
+    private String pestype;
+    @ApiModelProperty("人员类别其他文本")
+    private String pestypeothertext;
+    @ApiModelProperty("居住情况其他文本")
+    private String liveStateOtherText;
 
+
+    public String getPestype() {
+        return pestype;
+    }
+
+    public void setPestype(String pestype) {
+        this.pestype = pestype;
+    }
+
+    public String getPestypeothertext() {
+        return pestypeothertext;
+    }
+
+    public void setPestypeothertext(String pestypeothertext) {
+        this.pestypeothertext = pestypeothertext;
+    }
+
+    public String getLiveStateOtherText() {
+        return liveStateOtherText;
+    }
+
+    public void setLiveStateOtherText(String liveStateOtherText) {
+        this.liveStateOtherText = liveStateOtherText;
+    }
 
     public Integer getId() {
         return id;
