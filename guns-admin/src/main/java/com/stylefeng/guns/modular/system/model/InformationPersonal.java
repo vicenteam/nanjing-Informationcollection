@@ -36,7 +36,7 @@ public class InformationPersonal extends Model<InformationPersonal> {
      * 性别
      */
     @ApiModelProperty("性别")
-    private Integer sex;
+    private String sex;
     /**
      * 民族
      */
@@ -146,11 +146,11 @@ public class InformationPersonal extends Model<InformationPersonal> {
         this.fullName = fullName;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
