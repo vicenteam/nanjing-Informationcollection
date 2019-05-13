@@ -45,6 +45,7 @@ public class ApiLivingConditionController extends BaseController {
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<LivingCondition> add(LivingCondition livingCondition, int parentId) throws Exception {
+        if(livingCondition.getId()!=null&&livingCondition.getId()==-1)livingCondition.setId(null);
         ResponseData<LivingCondition> informationPersonalResponseData = new ResponseData<>();
         livingCondition.setParentId(parentId);
         livingCondition.setCreateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));

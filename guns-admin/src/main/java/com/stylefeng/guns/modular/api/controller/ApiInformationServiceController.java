@@ -44,6 +44,7 @@ public class ApiInformationServiceController extends BaseController {
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationService> add(InformationService informationService, int parentId) throws Exception {
+        if(informationService.getId()!=null&&informationService.getId()==-1)informationService.setId(null);
         ResponseData<InformationService> informationPersonalResponseData = new ResponseData<>();
         informationService.setParentId(parentId);
         informationService.setCreateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));

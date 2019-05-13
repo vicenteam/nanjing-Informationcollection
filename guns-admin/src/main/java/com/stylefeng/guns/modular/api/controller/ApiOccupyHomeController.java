@@ -46,6 +46,7 @@ public class ApiOccupyHomeController extends BaseController {
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<OccupyHome> add(OccupyHome occupyHome, int parentId) {
+        if(occupyHome.getId()!=null&&occupyHome.getId()==-1)occupyHome.setId(null);
         ResponseData<OccupyHome> informationPersonalResponseData = new ResponseData<>();
         occupyHome.setParentId(parentId);
         occupyHomeService.insert(occupyHome);

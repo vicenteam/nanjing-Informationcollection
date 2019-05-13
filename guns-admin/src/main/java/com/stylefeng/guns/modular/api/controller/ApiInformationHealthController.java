@@ -47,6 +47,7 @@ public class ApiInformationHealthController extends BaseController {
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<InformationHealth> add(InformationHealth informationHealth, int parentId) throws Exception {
+        if(informationHealth.getId()!=null&&informationHealth.getId()==-1)informationHealth.setId(null);
         ResponseData<InformationHealth> informationPersonalResponseData = new ResponseData<>();
         informationHealth.setParentId(parentId);
         informationHealthService.insert(informationHealth);

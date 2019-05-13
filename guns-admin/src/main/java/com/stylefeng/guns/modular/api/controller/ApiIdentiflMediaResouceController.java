@@ -52,6 +52,7 @@ public class ApiIdentiflMediaResouceController extends BaseController {
             @ApiImplicitParam(required = true, name = "status", value = "资源来源状态 0第一次走访评估信息 1第二次走评估访信息", paramType = "query"),
     })
     public ResponseData<IdentiflMediaResouce> add(IdentiflMediaResouce identiflMediaResouce, int parentId) {
+        if(identiflMediaResouce.getId()!=null&&identiflMediaResouce.getId()==-1)identiflMediaResouce.setId(null);
         ResponseData<IdentiflMediaResouce> informationPersonalResponseData = new ResponseData<>();
 //        identiflMediaResouce.setTableid(parentId);
         identiflMediaResouceService.insert(identiflMediaResouce);

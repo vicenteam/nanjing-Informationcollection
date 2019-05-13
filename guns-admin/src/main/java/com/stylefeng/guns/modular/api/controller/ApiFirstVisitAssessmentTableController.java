@@ -66,6 +66,7 @@ public class ApiFirstVisitAssessmentTableController extends BaseController {
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
     public ResponseData<FirstVisitAssessmentTable> add(FirstVisitAssessmentTable firstVisitAssessmentTable, int parentId) {
+        if(firstVisitAssessmentTable.getId()!=null&&firstVisitAssessmentTable.getId()==-1)firstVisitAssessmentTable.setId(null);
         ResponseData<FirstVisitAssessmentTable> informationPersonalResponseData = new ResponseData<>();
         firstVisitAssessmentTable.setFaceIdentifyTopId(parentId);
         firstVisitAssessmentTableService.insert(firstVisitAssessmentTable);

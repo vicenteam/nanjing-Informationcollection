@@ -61,6 +61,7 @@ public class ApiContactInformationController extends BaseController {
             @ApiImplicitParam( name = "parentId", value = "FaceIdentifyTop_id"),
     })
     public ResponseData<ContactInformation> add(ContactInformation contactInformation, int parentId) {
+        if(contactInformation.getId()!=null&&contactInformation.getId()==-1)contactInformation.setId(null);
         ResponseData<ContactInformation> informationPersonalResponseData = new ResponseData<>();
         contactInformation.setParentId(parentId);
         iContactInformationService.insert(contactInformation);

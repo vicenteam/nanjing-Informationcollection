@@ -56,7 +56,7 @@ public class InformationPersonal extends Model<InformationPersonal> {
      * 身份证号
      */
     @ApiModelProperty("身份证号")
-    private Integer cardId;
+    private String cardId;
     /**
      * 手机号
      */
@@ -178,11 +178,12 @@ public class InformationPersonal extends Model<InformationPersonal> {
         this.birthDate = birthDate;
     }
 
-    public Integer getCardId() {
+
+    public String getCardId() {
         return cardId;
     }
 
-    public void setCardId(Integer cardId) {
+    public void setCardId(String cardId) {
         this.cardId = cardId;
     }
 
