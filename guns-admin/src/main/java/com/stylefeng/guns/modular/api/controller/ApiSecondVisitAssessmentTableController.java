@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.api.controller;
 
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
+import com.stylefeng.guns.modular.api.util.HttpsUtil;
 import com.stylefeng.guns.modular.face.service.ISecondVisitAssessmentTableService;
 import com.stylefeng.guns.modular.system.model.SecondVisitAssessmentTable;
 import io.swagger.annotations.Api;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/apisecondvisitassessmenttablecontroller")
@@ -52,7 +56,30 @@ public class ApiSecondVisitAssessmentTableController extends BaseController {
         ResponseData<SecondVisitAssessmentTable> informationPersonalResponseData = new ResponseData<>();
         secondVisitAssessmentTable.setFaceIdentifyTopId(parentId);
         secondVisitAssessmentTableService.insert(secondVisitAssessmentTable);
+
         informationPersonalResponseData.setDataCollection(secondVisitAssessmentTable);
+        Map<String, Object> map = new HashMap<>();
+        map.put("idNumber", secondVisitAssessmentTable.getSecondvisitIdcard());
+        map.put("name", secondVisitAssessmentTable.getSecondvisitName());
+        map.put("sex", secondVisitAssessmentTable.getSecondvisitSex());
+        map.put("age", secondVisitAssessmentTable.getSecondvisitAge());
+        map.put("nation", secondVisitAssessmentTable.getSecondvisitEthnic());
+        map.put("educationLevel", secondVisitAssessmentTable.getSecondvisitLevelOfEducation());
+        map.put("marriageStatus", secondVisitAssessmentTable.getSecondvisitMaritalStatus());
+        map.put("socialSecurityCard", secondVisitAssessmentTable.getSecondvisitOthercard());
+        map.put("address", secondVisitAssessmentTable.getSecondvisitAddress());
+        map.put("familyPhone", secondVisitAssessmentTable.getSecondvisitHomePhone());
+        map.put("phone", secondVisitAssessmentTable.getSecondvisitPhoneNumber());
+        map.put("juzhuCommunity", secondVisitAssessmentTable.getSecondvisitLivingSituation());
+        map.put("medical", secondVisitAssessmentTable.getSecondvisitMedical());
+        map.put("minzhengIndex", secondVisitAssessmentTable.getSecondvisitVisitObjectCategories());
+        map.put("pattern", secondVisitAssessmentTable.getSecondvisitExpectationsPension());
+        map.put("desiredService", secondVisitAssessmentTable.getSecondvisitExpectationsPensionServer());
+        HttpsUtil httpsUtil = new HttpsUtil();
+        httpsUtil.api = HttpsUtil.CUSTOMER_INFO_UPDATESECONDVISITCUSTOMERS;
+        httpsUtil.map_temp = map;
+        Thread thread = new Thread(httpsUtil);
+        thread.run();
         return informationPersonalResponseData;
     }
 

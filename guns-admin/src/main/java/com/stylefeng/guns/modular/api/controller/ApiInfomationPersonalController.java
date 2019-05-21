@@ -7,6 +7,7 @@ import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
 import com.stylefeng.guns.modular.api.model.user.UserModel;
+import com.stylefeng.guns.modular.api.util.HttpsUtil;
 import com.stylefeng.guns.modular.api.util.ReflectionObject;
 import com.stylefeng.guns.modular.face.service.IInformationPersonalService;
 import com.stylefeng.guns.modular.system.dao.UserMapper;
@@ -32,15 +33,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/apiinfomationpersonalcontroller")
-@Api(value="采集人基础信息controller",tags={"采集人基础信息操作接口"})
+@Api(value = "采集人基础信息controller", tags = {"采集人基础信息操作接口"})
 public class ApiInfomationPersonalController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(ApiInfomationPersonalController.class);
 
     @Autowired
-   private IInformationPersonalService iInformationPersonalService;
+    private IInformationPersonalService iInformationPersonalService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation("新增采集人基础信息")
@@ -65,14 +68,33 @@ public class ApiInfomationPersonalController extends BaseController {
             @ApiImplicitParam(required = true, name = "hobby", value = "爱好", paramType = "query"),
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query")
     })
-    public ResponseData<InformationPersonal> add(InformationPersonal informationPersonal,int parentId) throws Exception {
-        if(informationPersonal.getId()!=null&&informationPersonal.getId()==-1)informationPersonal.setId(null);
+    public ResponseData<InformationPersonal> add(InformationPersonal informationPersonal, int parentId) throws Exception {
+        if (informationPersonal.getId() != null && informationPersonal.getId() == -1) informationPersonal.setId(null);
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
         informationPersonal.setParentId(parentId);
-        informationPersonal.setCreateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
+        informationPersonal.setCreateDate(DateUtil.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
         informationPersonal.setStatus(0);
         iInformationPersonalService.insert(informationPersonal);
         informationPersonalResponseData.setDataCollection(informationPersonal);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", informationPersonal.getFullName());
+        map.put("phone", informationPersonal.getTelephone());
+        map.put("sex", informationPersonal.getSex());
+        map.put("nation", informationPersonal.getMinZu());
+        map.put("age", informationPersonal.getAge());
+        map.put("birthday", informationPersonal.getBirthDate());
+        map.put("idNumber", informationPersonal.getCardId());
+        map.put("type", informationPersonal.getUserType() != null && informationPersonal.getUserType() == 1 ? "1" : "2");
+        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? "城市" : "农村");
+        map.put("address", informationPersonal.getAddress());
+        map.put("currentAddress", informationPersonal.getNowAddress());
+        map.put("belongAddressName", "1");
+        HttpsUtil httpsUtil = new HttpsUtil();
+        httpsUtil.api = HttpsUtil.CUSTOMER_INFO_INSERTCUSTOMER;
+        httpsUtil.map_temp = map;
+        Thread thread = new Thread(httpsUtil);
+        thread.run();
         return informationPersonalResponseData;
     }
 
@@ -102,11 +124,31 @@ public class ApiInfomationPersonalController extends BaseController {
     })
     public ResponseData<InformationPersonal> edit(InformationPersonal informationPersonal) throws Exception {
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
-        informationPersonal.setUpdateDate(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
+        informationPersonal.setUpdateDate(DateUtil.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
         iInformationPersonalService.updateById(informationPersonal);
         informationPersonalResponseData.setDataCollection(informationPersonal);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", informationPersonal.getFullName());
+        map.put("phone", informationPersonal.getTelephone());
+        map.put("sex", informationPersonal.getSex());
+        map.put("nation", informationPersonal.getMinZu());
+        map.put("age", informationPersonal.getAge());
+        map.put("birthday", informationPersonal.getBirthDate());
+        map.put("idNumber", informationPersonal.getCardId());
+        map.put("type", informationPersonal.getUserType() != null && informationPersonal.getUserType() == 1 ? "1" : "2");
+        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? "城市" : "农村");
+        map.put("address", informationPersonal.getAddress());
+        map.put("currentAddress", informationPersonal.getNowAddress());
+        map.put("belongAddressName", "1");
+        HttpsUtil httpsUtil = new HttpsUtil();
+        httpsUtil.api = HttpsUtil.CUSTOMER_INFO_UPDATECUSTOMER;
+        httpsUtil.map_temp = map;
+        Thread thread = new Thread(httpsUtil);
+        thread.run();
         return informationPersonalResponseData;
     }
+
     @RequestMapping(value = "/getData", method = RequestMethod.POST)
     @ApiOperation("获取采集人基础信息")
     @ApiImplicitParams({
@@ -115,7 +157,7 @@ public class ApiInfomationPersonalController extends BaseController {
     public ResponseData<InformationPersonal> getData(Integer parentId) throws Exception {
         ResponseData<InformationPersonal> informationPersonalResponseData = new ResponseData<>();
         EntityWrapper<InformationPersonal> informationPersonalEntityWrapper = new EntityWrapper<>();
-        informationPersonalEntityWrapper.eq("parentId",parentId);
+        informationPersonalEntityWrapper.eq("parentId", parentId);
         InformationPersonal informationPersonal = iInformationPersonalService.selectOne(informationPersonalEntityWrapper);
         informationPersonalResponseData.setDataCollection(informationPersonal);
         return informationPersonalResponseData;

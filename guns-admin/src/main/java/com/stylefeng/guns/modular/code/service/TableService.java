@@ -24,6 +24,9 @@ public class TableService {
      */
     public List<Map<String, Object>> getAllTables() {
         String sql = "select TABLE_NAME as tableName,TABLE_COMMENT as tableComment from information_schema.`TABLES` where TABLE_SCHEMA = '" + dbName + "'";
+//        String sql = "SELECT name\n" +
+//                "FROM sysobjects\n" +
+//                "WHERE xtype = 'u'";
         return SqlRunner.db().selectList(sql);
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.modular.api.apiparam.ResponseData;
 import com.stylefeng.guns.modular.api.base.BaseController;
 import com.stylefeng.guns.modular.api.model.user.FirstVisitStatusModel;
+import com.stylefeng.guns.modular.api.util.HttpsUtil;
 import com.stylefeng.guns.modular.face.service.IFirstVisitAssessmentTableService;
 import com.stylefeng.guns.modular.face.service.IOccupyHomeService;
 import com.stylefeng.guns.modular.system.model.FirstVisitAssessmentTable;
@@ -18,6 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/apifirstvisitassessmenttablecontroller")
@@ -71,6 +75,49 @@ public class ApiFirstVisitAssessmentTableController extends BaseController {
         firstVisitAssessmentTable.setFaceIdentifyTopId(parentId);
         firstVisitAssessmentTableService.insert(firstVisitAssessmentTable);
         informationPersonalResponseData.setDataCollection(firstVisitAssessmentTable);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("city", firstVisitAssessmentTable.getFirstvisitCommunity1());
+        map.put("zone", firstVisitAssessmentTable.getFirstvisitCommunity1());
+        map.put("street", firstVisitAssessmentTable.getFirstvisitCommunity2());
+        map.put("shequ", firstVisitAssessmentTable.getFirstvisitCommunity3());
+        map.put("name", firstVisitAssessmentTable.getFirstvisitName());
+        map.put("sex", firstVisitAssessmentTable.getFirstvisitSex());
+        map.put("nation", "");
+        map.put("educationLevel", firstVisitAssessmentTable.getFirstvisitLevelEducation());
+        map.put("idNumber", firstVisitAssessmentTable.getFirstvisitIdcard());
+        map.put("phone", firstVisitAssessmentTable.getFirstvisitPhone());
+        map.put("address", firstVisitAssessmentTable.getFirstvisitResidentialAddress());
+        map.put("residentTime", firstVisitAssessmentTable.getFirstvisitResidentialTime());
+        map.put("jtcyname1", firstVisitAssessmentTable.getFirstvisitEmergencyContact());
+        map.put("jtcyrelation1", firstVisitAssessmentTable.getFirstvisitEmergencyContact());
+        map.put("jtcyaddress1", firstVisitAssessmentTable.getFirstvisitEmergencyContact());
+        map.put("jtcyphone1", firstVisitAssessmentTable.getFirstvisitEmergencyContact());
+        map.put("customerKey", "1");
+        map.put("professional", firstVisitAssessmentTable.getFirstvisitProfessional());
+        map.put("personType", firstVisitAssessmentTable.getFirstvisitCategory());
+        map.put("economicSource", firstVisitAssessmentTable.getFirstvisitEconomicSources());
+        map.put("marriageStatus", firstVisitAssessmentTable.getFirstvisitMarital());
+        map.put("childStatus", firstVisitAssessmentTable.getFirstvisitChildren());
+        map.put("medical", firstVisitAssessmentTable.getFirstvisitMedicalCategory());
+        map.put("juzhuCommunity", firstVisitAssessmentTable.getFirstvisitLiving());
+        map.put("privateHousing", firstVisitAssessmentTable.getFirstvisitLivingHouse());
+        map.put("floorElevator", firstVisitAssessmentTable.getFirstvisitLivingLayer());
+        map.put("residentialFloor", firstVisitAssessmentTable.getFirstvisitLivingElevator());
+        map.put("indoorToilet", firstVisitAssessmentTable.getFirstvisitLivingToilet());
+        map.put("indoorBath", firstVisitAssessmentTable.getFirstvisitLivingBathingFacilities());
+        map.put("originalCare", firstVisitAssessmentTable.getFirstvisitOriginalCareSituation());
+        map.put("governmentService", firstVisitAssessmentTable.getFirstvisitService());
+        map.put("serviceNeeds", firstVisitAssessmentTable.getFirstvisitService());
+        map.put("physicalCondition", firstVisitAssessmentTable.getFirstvisitPhysicalConditionCheckbox());
+        map.put("mentality", firstVisitAssessmentTable.getFirstvisitPsychological());
+        map.put("activities", firstVisitAssessmentTable.getFirstvisitSocialActivities());
+        map.put("activitiesType", firstVisitAssessmentTable.getFirstvisitSocialActivitiesType());
+        HttpsUtil httpsUtil = new HttpsUtil();
+        httpsUtil.api = HttpsUtil.CUSTOMER_INFO_UPDATEVISITCUSTOMERS;
+        httpsUtil.map_temp = map;
+        Thread thread = new Thread(httpsUtil);
+        thread.run();
         return informationPersonalResponseData;
     }
 
@@ -79,12 +126,12 @@ public class ApiFirstVisitAssessmentTableController extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(required = true, name = "parentId", value = "FaceIdentifyTop_id", paramType = "query"),
     })
-    public ResponseData<FirstVisitStatusModel> firstVisitStatus(FirstVisitAssessmentTable firstVisitAssessmentTable, int parentId) {
+    public ResponseData<FirstVisitStatusModel> firstVisitStatus(int parentId) {
         ResponseData<FirstVisitStatusModel> informationPersonalResponseData = new ResponseData<>();
         FirstVisitStatusModel firstVisitStatusModel = new FirstVisitStatusModel();
-        firstVisitAssessmentTable.setFaceIdentifyTopId(parentId);
+//        firstVisitAssessmentTable.setFaceIdentifyTopId(parentId);
         EntityWrapper<FirstVisitAssessmentTable> informationPersonalEntityWrapper = new EntityWrapper<>();
-        informationPersonalEntityWrapper.eq("parentId", parentId);
+        informationPersonalEntityWrapper.eq("face_identify_top_id", parentId);
         FirstVisitAssessmentTable firstVisitAssessmentTable1 = firstVisitAssessmentTableService.selectOne(informationPersonalEntityWrapper);
         if (firstVisitAssessmentTable1 != null) {
             firstVisitStatusModel.setNum(0);
