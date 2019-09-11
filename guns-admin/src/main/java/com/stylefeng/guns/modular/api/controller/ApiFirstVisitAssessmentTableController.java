@@ -77,10 +77,10 @@ public class ApiFirstVisitAssessmentTableController extends BaseController {
         informationPersonalResponseData.setDataCollection(firstVisitAssessmentTable);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("city", firstVisitAssessmentTable.getFirstvisitCommunity1());
-        map.put("zone", firstVisitAssessmentTable.getFirstvisitCommunity1());
-        map.put("street", firstVisitAssessmentTable.getFirstvisitCommunity2());
-        map.put("shequ", firstVisitAssessmentTable.getFirstvisitCommunity3());
+        map.put("city", "南京市");
+        map.put("zone", "高新区");
+        map.put("street", "秣陵街道");
+        map.put("shequ", "东善桥社区");
         map.put("name", firstVisitAssessmentTable.getFirstvisitName());
         map.put("sex", firstVisitAssessmentTable.getFirstvisitSex());
         map.put("nation", "");

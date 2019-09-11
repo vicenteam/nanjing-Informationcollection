@@ -86,10 +86,10 @@ public class ApiInfomationPersonalController extends BaseController {
         map.put("birthday", informationPersonal.getBirthDate());
         map.put("idNumber", informationPersonal.getCardId());
         map.put("type", informationPersonal.getUserType() != null && informationPersonal.getUserType() == 1 ? "1" : "2");
-        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? "城市" : "农村");
+        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? 1 : 2);
         map.put("address", informationPersonal.getAddress());
         map.put("currentAddress", informationPersonal.getNowAddress());
-        map.put("belongAddressName", "1");
+        map.put("belongAddressName", "南京分公司");
         HttpsUtil httpsUtil = new HttpsUtil();
         httpsUtil.api = HttpsUtil.CUSTOMER_INFO_INSERTCUSTOMER;
         httpsUtil.map_temp = map;
@@ -137,10 +137,10 @@ public class ApiInfomationPersonalController extends BaseController {
         map.put("birthday", informationPersonal.getBirthDate());
         map.put("idNumber", informationPersonal.getCardId());
         map.put("type", informationPersonal.getUserType() != null && informationPersonal.getUserType() == 1 ? "1" : "2");
-        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? "城市" : "农村");
+        map.put("lifeAreas", informationPersonal.getAreaType() != null && informationPersonal.getAreaType() == 1 ? "1" : "2");
         map.put("address", informationPersonal.getAddress());
         map.put("currentAddress", informationPersonal.getNowAddress());
-        map.put("belongAddressName", "1");
+        map.put("belongAddressName", "南京分公司");
         HttpsUtil httpsUtil = new HttpsUtil();
         httpsUtil.api = HttpsUtil.CUSTOMER_INFO_UPDATECUSTOMER;
         httpsUtil.map_temp = map;
